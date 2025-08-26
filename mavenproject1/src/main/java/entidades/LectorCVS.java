@@ -4,12 +4,6 @@
  */
 package entidades;
 
-/**
- *
- * @author dmena
- */
-import entidades.Artista;
-import entidades.ObraArte;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,14 +11,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LectorCSV {
-    
-    public static Map<String, Object> leerDatosDesdeCSV(String rutaArchivo) throws IOException {
-        List<Artista> artistas = new ArrayList<>();
-        List<ObraArte> obras = new ArrayList<>();
+/**
+ *
+ * @author dmena
+ */
+public class LectorCVS
+{
+    public static Map<String, Object> leerDatosDesdeCSV() throws IOException 
+    {
+        ArrayList<Artista> artistas = new ArrayList<>();
+        ArrayList<ObraArte> obras = new ArrayList<>();
         Map<Integer, Artista> mapaArtistas = new HashMap<>();
         
-        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(""))) {
             String linea;
             boolean primeraLinea = true;
             
