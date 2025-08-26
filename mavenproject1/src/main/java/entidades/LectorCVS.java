@@ -23,54 +23,45 @@ public class LectorCVS
         ArrayList<ObraArte> obras = new ArrayList<>();
         Map<Integer, Artista> mapaArtistas = new HashMap<>();
         
-        try (BufferedReader br = new BufferedReader(new FileReader(""))) {
-            String linea;
-            boolean primeraLinea = true;
+        BufferedReader br = new BufferedReader(new FileReader(""));
+        String linea;
+        boolean primeraLinea = true;
             
-            while ((linea = br.readLine()) != null) {
-                // Saltar la primera línea si es el encabezado
-                if (primeraLinea) {
-                    primeraLinea = false;
-                    continue;
-                }
+        while ((linea = br.readLine()) != null)
+        {
+            if (primeraLinea) {
+                primeraLinea = false;
+                continue;
+            }
+            String[] datos = linea.split(",");
+            
+            if (datos.length >= 6) 
+            {
+                    
+                int idArtista = Integer.parseInt(datos[0]);
+                String nombreArtista = datos[1];
+                String nacionalidad = datos[2];
+                        
+                String idObra = datos[3];
+                String tituloObra = datos[4];
+                int anioObra = Integer.parseInt(datos[5]);
+                float precioObra = Float.parseFloat(datos[6]);
                 
-                // Dividir la línea por comas
-                String[] datos = linea.split(",");
-                
-                if (datos.length >= 6) {
-                    try {
-                        // Leer datos del artista
-                        int idArtista = Integer.parseInt(datos[0].trim());
-                        String nombreArtista = datos[1].trim();
-                        String nacionalidad = datos[2].trim();
-                        
-                        // Leer datos de la obra
-                        String idObra = datos[3].trim();
-                        String tituloObra = datos[4].trim();
-                        int anioObra = Integer.parseInt(datos[5].trim());
-                        float precioObra = Float.parseFloat(datos[6].trim());
-                        
-                        // Crear o recuperar el artista
-                        Artista artista;
-                        if (mapaArtistas.containsKey(idArtista)) {
-                            artista = mapaArtistas.get(idArtista);
-                        } else {
-                            artista = new Artista(idArtista, nombreArtista, nacionalidad);
-                            artistas.add(artista);
-                            mapaArtistas.put(idArtista, artista);
-                        }
-                        
-                        // Crear la obra de arte
-                        ObraArte obra = new ObraArte(idObra, tituloObra, artista, anioObra, precioObra, true);
-                        obras.add(obra);
-                        
-                    } catch (NumberFormatException e) {
-                        System.err.println("Error al convertir número en línea: " + linea);
-                    }
+                Artista artista;
+                if (mapaArtistas.containsKey(idArtista)) 
+                {
+                    artista = mapaArtistas.get(idArtista);
+                } 
+                else 
+                {
+                    artista = new Artista(idArtista, nombreArtista, nacionalidad);
+                    artistas.add(artista);
+                    mapaArtistas.put(idArtista, artista);
                 }
+                ObraArte obra = new ObraArte(idObra, tituloObra, artista.getNombre(), anioObra, precioObra, true);
+                obras.add(obra);
             }
         }
-        
         Map<String, Object> resultado = new HashMap<>();
         resultado.put("artistas", artistas);
         resultado.put("obras", obras);
