@@ -4,9 +4,8 @@
  */
 package entidades;
 
-import java.util.ArrayList; 
-import java.util.List;
-
+import java.util.ArrayList;
+import java.util.List; // ✅ Importar la interfaz List
 
 /**
  *
@@ -14,51 +13,54 @@ import java.util.List;
  */
 public class Artista {
 
-    private int  id;
+    private int id;
     private String nombre;
     private String nacionalidad;
-    private List<ObraArte> obras; 
+    private List<ObraArte> obras;
     
-    public Artista( int id , String nombre  , String nacionalidad )
+    public Artista(int id, String nombre, String nacionalidad) 
     {
         this.id = id;
         this.nombre = nombre;
         this.nacionalidad = nacionalidad;
-        obras = new ArrayList<>();
-        
+        this.obras = new ArrayList<>(); //
+    
+       
     }
     
-    public int getId()
-    {
-        return id;
-    }
-    public  String getNombre()
-    {
-        return nombre;
-    }
-    public String getNacionalidad()
-    {
-        return nacionalidad;
-    }
-    public List<ObraArte> getObras()
-    {
-        return obras;
-    }
+     public int getId() 
+        {
+            return id;
+        }
     
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-    public void setNomebre(int id)
-    {
-        this.id = id;
-    }
-    public void setNacionalidad(int id)
-    {
-        this.id = id;
-    }
-    public void set
+        public String getNombre() {
+            return nombre;
+        }
     
+        public String getNacionalidad() {
+            return nacionalidad;
+        }
+    
+    
+        public List<ObraArte> getObras() {
+            return new ArrayList<>(obras); 
+        }
+    
+        public void setId(int id) {
+            this.id = id;
+        }
+    
+    
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+    
+    
+        public void setNacionalidad(String nacionalidad) 
+        {
+            this.nacionalidad = nacionalidad;
+        }
+
 }
     
 

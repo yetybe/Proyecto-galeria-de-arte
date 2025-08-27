@@ -9,26 +9,27 @@ package entidades;
  * @author Benja
  */
 public class ObraArte{
-private String id;
+private int id;
 private String titulo;
 private String artista;
 private int anio;
 private float precio;
 private boolean disponibilidad;
 
-public ObraArte(String id, String titulo, String artista, int ano, float precio, boolean disponibilidad) {
+
+public ObraArte(int id, String titulo, String artista, int ano, float precio) {
 this.id = id;
 this.titulo = titulo;
 this.artista = artista;
 this.anio = ano;
 this.precio = precio;
-this.disponibilidad = disponibilidad; 
+this.disponibilidad = true; 
  }
 
-public String getId() {
+public int getId() {
 	return id;
 }
-public void setId(String id) {
+public void setId(int id) {
 	this.id = id;
 }
 public String getTitulo() {
@@ -70,6 +71,7 @@ public boolean getDisponibilidad() {
 public void setDisponibilidad(boolean disponibilidad) {
 	this.disponibilidad = disponibilidad;
 }
+
 
 
 }

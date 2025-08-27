@@ -4,17 +4,10 @@
  */
 package entidades;
 
-import java.util.ArrayList; 
-import java.util.List;
-import java.util.Date;
-
 /**
  *
  * @author Benja
  */
-public class Exposicion {
-    private List<ObraArte> obrasExhibidas;
-    private String ubicacion;
+public class Ventas {
     
-    public Exposicion( int id , )
 }
