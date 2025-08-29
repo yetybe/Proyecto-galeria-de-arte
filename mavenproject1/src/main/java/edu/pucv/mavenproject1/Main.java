@@ -8,6 +8,97 @@ package edu.pucv.mavenproject1;
  *
  * @author Benja
  */
+import java.io.*;
+import java.util.*;
+import entidades.Artista;
+import entidades.ObraArte;
+import entidades.LectorCVS;
+
 public class Main {
+    // Listas para almacenar los datos
+    private static List<Artista> artistas = new ArrayList<>();
+    private static List<ObraArte> obras = new ArrayList<>();
     
+    public static void mostrarMenu() {
+        System.out.println("\n--------Menu Galeria--------");
+        System.out.println("1. Agregar Obra");
+        System.out.println("2. Mostrar Inventario");
+        System.out.println("3. Cargar datos desde CSV");
+        System.out.println("4. Mostrar artistas");
+        System.out.println("0. Salir");
+        System.out.println("----------------------------");
+    }
+    
+    public static void main(String[] args)throws IOException
+    {
+        BufferedReader scan = new BufferedReader(new InputStreamReader(System.in));
+        
+        int opcion;
+        
+        do {
+            mostrarMenu();
+            System.out.print("Ingrese su Opción: ");
+            
+            opcion = Integer.parseInt(scan.readLine());
+                
+            switch(opcion) {
+                case 1:
+                    //agregarObraManual(scan);
+                    break;            
+                    
+                case 2:
+                    //mostrarInventario();
+                    break;
+                    
+                case 3:
+                    cargarDesdeCSV();
+                    break;
+                    
+                case 4:
+                    //mostrarArtistas();
+                    break;
+                    
+                case 0:
+                    System.out.println("Saliendo del sistema...");
+                    break;
+                    
+                default:
+                    System.out.println("Opción no válida");
+                }
+            
+        } while(opcion != 0);
+    }
+    
+    private static void cargarDesdeCSV()throws IOException
+    {
+        // Usar el lector CSV
+        Map<String, Object> datos = LectorCVS.leerDatosDesdeCSV();
+        List<Artista> nuevosArtistas = (List<Artista>) datos.get("artistas");
+        List<ObraArte> nuevasObras = (List<ObraArte>) datos.get("obras");
+        
+        // Agregar a las listas existentes (evitando duplicados)
+        for (Artista nuevoArtista : nuevosArtistas)
+        {
+            boolean existe = false;
+            for (Artista artistaExistente : artistas)
+            {
+                if (artistaExistente.getId() == nuevoArtista.getId())
+                {
+                    existe = true;
+                    break;
+                }
+            }
+            if (!existe)
+            {
+                artistas.add(nuevoArtista);
+            }
+        }
+            
+        obras.addAll(nuevasObras);
+            
+        System.out.println("Datos cargados exitosamente:");
+        System.out.println("- Artistas agregados: " + nuevosArtistas.size());
+        System.out.println("- Obras agregadas: " + nuevasObras.size());
+        
+    }
 }
