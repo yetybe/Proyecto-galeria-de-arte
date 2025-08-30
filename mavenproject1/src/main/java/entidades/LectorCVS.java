@@ -42,7 +42,7 @@ public class LectorCVS
                 String nombreArtista = datos[1];
                 String nacionalidad = datos[2];
                         
-                String idObra = datos[3];
+                int idObra = Integer.parseInt(datos[3].trim());
                 String tituloObra = datos[4];
                 int anioObra = Integer.parseInt(datos[5]);
                 float precioObra = Float.parseFloat(datos[6]);

@@ -19,7 +19,7 @@ public class Inventario {
      
     public Inventario()
     {
-        obrasInventario = new HasMap<>();
+        obrasInventario = new HashMap<>();
          
     }
      
@@ -35,6 +35,17 @@ public class Inventario {
     
     public ObraArte buscarObra(int idObra) { 
         return obrasInventario.get(idObra);
+    }
+    
+    //Sobrecarga de métodos: busca por ID y verifica si está disponible 
+    public ObraArte buscarObra(int idObra, boolean disponible)
+    {
+        ObraArte obra = obrasInventario.get(idObra);
+        if(obra != null && (!disponible || obra.getDisponibilidad()))
+        {
+            return obra;
+        }
+        return null;
     }
     
     public boolean contieneObra(int idObra) { 

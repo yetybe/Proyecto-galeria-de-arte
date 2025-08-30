@@ -17,7 +17,7 @@ private float precio;
 private boolean disponibilidad;
 
 
-public ObraArte(int id, String titulo, String artista, int ano, float precio) {
+public ObraArte(int id, String titulo, String artista, int ano, float precio, boolean disponibilidad) {
 this.id = id;
 this.titulo = titulo;
 this.artista = artista;

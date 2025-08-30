@@ -34,6 +34,21 @@ public class Prestamos {
         return obrasPrestamo.get(idObra);
     }
     
+    // Sobrecarga de métodos: buscar obra por ID y muestra un mensaje
+    public ObraArte buscarObra(int idObra, String mensaje)
+    {
+        ObraArte obra = obrasPrestamo.get(idObra);
+        if(obra != null)
+        {
+            System.out.println(mensaje + ": " + obra.getTitulo());
+        }
+        else
+        {
+            System.out.println(mensaje + ": No se encontró la obra con el ID: " + idObra);
+        }
+        return obra; 
+    }
+    
     public boolean contieneObra(int idObra) { 
         return obrasPrestamo.containsKey(idObra);
     }
