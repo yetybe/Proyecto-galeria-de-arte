@@ -1,0 +1,13 @@
+id_artista,nombre_artista,nacionalidad,id_obra,titulo_obra,anio,precio
+1,Leonardo da Vinci,Italiana,101,La Gioconda,1503,12500000
+1,Leonardo da Vinci,Italiana,102,La Última Cena,1498,9800000
+2,Vincent van Gogh,Holandesa,103,La Noche Estrellada,1889,8500000
+2,Vincent van Gogh,Holandesa,104,Los Girasoles,1888,7200000
+3,Pablo Picasso,Española,105,Guernica,1937,9500000
+3,Pablo Picasso,Española,106,Las Señoritas de Avignon,1907,6800000
+4,Frida Kahlo,Mexicana,107,Las Dos Fridas,1939,4200000
+4,Frida Kahlo,Mexicana,108,Autorretrato con Collar de Espinas,1940,3800000
+5,Claudio Bravo,Chilena,109,El Pintor y su Modelo,1980,2500000
+5,Claudio Bravo,Chilena,110,Naturaleza Muerta con Melones,1995,1800000
+6,Roberto Matta,Chilena,111,Écouter Vivre,1973,3200000
+6,Roberto Matta,Chilena,112,Le Long Pont,1959,2800000
