@@ -38,11 +38,21 @@ public class Prestamos {
         return obrasPrestamo.containsKey(idObra);
     }
     
-    public realizarPrestamo(int idObra)
+    public boolean realizarPrestamo(int idObra)
     {
-        int idPrestado = obrasPrestamo.buscarObra(idObra);
-        
+        ObraArte obra = buscarObra(idObra);
+        if (obra != null)
+        {
+            eliminarObra(idObra);
+            System.out.println("Préstamo realizado con éxito");
+            System.out.println("Obra: " + obra.getTitulo());
+            return true;
+        }
+        else
+        {
+            System.out.println("No se encontró ninguna obra con ID: " + idObra);
+            return false;
+        }
     }
     
-
 }
