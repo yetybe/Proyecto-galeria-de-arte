@@ -24,7 +24,6 @@ public class Main {
         System.out.println("1. Agregar Obra");
         System.out.println("2. Mostrar Inventario");
         System.out.println("3. Cargar datos desde CSV");
-        System.out.println("4. Mostrar artistas");
         System.out.println("0. Salir");
         System.out.println("----------------------------");
     }
@@ -43,19 +42,15 @@ public class Main {
                 
             switch(opcion) {
                 case 1:
-                    //agregarObraManual(scan);
+                    agregarObraManual(scan);
                     break;            
                     
                 case 2:
-                    //mostrarInventario();
+                    mostrarInventario();
                     break;
                     
                 case 3:
                     cargarDesdeCSV();
-                    break;
-                    
-                case 4:
-                    //mostrarArtistas();
                     break;
                     
                 case 0:
@@ -67,6 +62,59 @@ public class Main {
                 }
             
         } while(opcion != 0);
+    }
+    
+    private static void agregarObraManual(BufferedReader scan)throws IOException
+    {
+        System.out.println("Ingrese ID de la Obra :");
+        int id = Integer.parseInt(scan.readLine());
+        
+        System.out.println("Ingrese Titulo de la Obra :");
+        String titulo = scan.readLine();
+        
+        System.out.println("Ingrese ID del Artista");
+        int idArtista = Integer.parseInt(scan.readLine());
+        
+        System.out.println("Ingrese Artista de la Obra :");
+        String artist = scan.readLine();
+        
+        System.out.println("Ingrese Año de la Obra :");
+        int ano = Integer.parseInt(scan.readLine());
+        
+        System.out.println("Ingrese precio de la Obra :");
+        float precio = Float.parseFloat(scan.readLine());
+        
+        ObraArte nuevaObra = new ObraArte(id, titulo, artist, ano, precio, true);
+        obras.add(nuevaObra);
+        
+        for(Artista aux: artistas)
+        {
+            if(aux.getId() == idArtista)
+            {
+                aux.agregarObra(nuevaObra);
+                return;
+            }
+        }
+    }
+    
+    private static void mostrarInventario()
+    {
+        for(ObraArte temp: obras)
+        {
+            System.out.println("ID :" + temp.getId());
+            System.out.println("Titulo :" + temp.getTitulo());
+            System.out.println("Artista :" + temp.getArtista());
+            System.out.println("Año :" + temp.getAnio());
+            System.out.println("Precio :" + temp.getPrecio());
+            if(temp.getDisponibilidad())
+            {
+                System.out.println("Disponible");
+            }
+            else
+            {
+                System.out.println("NO Disponible");
+            }
+        }
     }
     
     private static void cargarDesdeCSV()throws IOException
