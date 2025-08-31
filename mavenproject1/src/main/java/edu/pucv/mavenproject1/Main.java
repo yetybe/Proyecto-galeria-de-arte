@@ -101,9 +101,13 @@ public class Main {
     {
         for(Artista temp: artistas)
         {
+            System.out.println("========================");
             System.out.println("ID :" + temp.getId());
             System.out.println("Artista :" + temp.getNombre());
             System.out.println("Nacionalidad :" + temp.getNacionalidad());
+            System.out.println("========================");
+            System.out.println("Obras del Artista");
+            System.out.println("========================");
             for(ObraArte temp2: temp.getObras())
             {
                 System.out.println("ID Obra :" + temp2.getId());
@@ -120,6 +124,7 @@ public class Main {
                     System.out.println("No Disponible");
                 }
             }
+            System.out.println("========================");
         }
     }
     
