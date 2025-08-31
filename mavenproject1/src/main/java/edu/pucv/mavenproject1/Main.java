@@ -99,20 +99,26 @@ public class Main {
     
     private static void mostrarInventario()
     {
-        for(ObraArte temp: obras)
+        for(Artista temp: artistas)
         {
             System.out.println("ID :" + temp.getId());
-            System.out.println("Titulo :" + temp.getTitulo());
-            System.out.println("Artista :" + temp.getArtista());
-            System.out.println("Año :" + temp.getAnio());
-            System.out.println("Precio :" + temp.getPrecio());
-            if(temp.getDisponibilidad())
+            System.out.println("Artista :" + temp.getNombre());
+            System.out.println("Nacionalidad :" + temp.getNacionalidad());
+            for(ObraArte temp2: temp.getObras())
             {
-                System.out.println("Disponible");
-            }
-            else
-            {
-                System.out.println("NO Disponible");
+                System.out.println("ID Obra :" + temp2.getId());
+                System.out.println("Titulo :" + temp2.getTitulo());
+                System.out.println("Año :" + temp2.getAnio());
+                System.out.println("Precio :" + temp2.getPrecio());
+                if(temp2.getDisponibilidad())
+                {
+                    System.out.println("Disponible");
+                }
+                
+                else
+                {
+                    System.out.println("No Disponible");
+                }
             }
         }
     }
