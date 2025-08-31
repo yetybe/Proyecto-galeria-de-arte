@@ -5,7 +5,7 @@
 package entidades;
 
 import java.util.ArrayList;
-import java.util.List; // ✅ Importar la interfaz List
+import java.util.List; 
 
 /**
  *
@@ -60,6 +60,35 @@ public class Artista {
         {
             this.nacionalidad = nacionalidad;
         }
+        
+       public void agregarObra(ObraArte obra)
+       {
+          if (obra == null) return;
+          obras.add(obra);
+       }
+       
+       
+       
+      
+        public boolean eliminarObra(int idObra)
+        {
+            return obras.removeIf(obra -> obra.getId() == idObra);
+        }
+        
+    public ObraArte buscarObra(int id) 
+    {
+        List<ObraArte> aux = getObras();
+        for (ObraArte obra : aux) {
+            if (obra.getId() == id) {
+                return obra;
+            }
+        }
+        return null;
+    }
+        
+        
+        
+               
 
 }
     
