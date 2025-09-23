@@ -188,7 +188,7 @@ public class Main {
     
 }
     
-   public void eliminarExposicion(){
+    public void eliminarExposicion(){
        
     if (exposiciones.isEmpty()) {
         System.out.println("No hay exposiciones creadas para eliminar.");
@@ -203,7 +203,7 @@ public class Main {
     if (exposiciones.containsKey(id)) {
         
      
-        Exposicion exposicionEliminada = exposiciones.remove(idParaEliminar);
+        Exposicion exposicionEliminada = exposiciones.remove(id);
         
         System.out.println("\n¡Éxito! La exposición '" + exposicionEliminada.getNombre() + "' (ID: " + idParaEliminar + ") ha sido eliminada.");
         
@@ -214,6 +214,61 @@ public class Main {
     
     
    }
+   
+    public void mostrarExposicion(){
+        
+        if (exposiciones.isEmpty()) {
+        System.out.println("No hay exposiciones creadas para eliminar.");
+        return; 
+        }
+        
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Ingrese el id de la exposicion que desea buscar:");
+        int id = scan.nextInt();
+        
+        if (exposiciones.containsKey(id)) {
+        
+     
+        Exposicion infoExpo = exposiciones.get(id);
+        
+        System.out.println("\n--- Información de la Exposición ---");
+        System.out.println("ID: " + infoExpo.getId());
+        System.out.println("Nombre: " + infoExpo.getNombre());
+        System.out.println("Fecha de Inicio: " + infoExpo.getFechaIn());
+        System.out.println("Fecha de Fin: " + infoExpo.getFechaFin());
+        
+        System.out.println("\n--- Obras en esta Exposición ---");
+        List<ObraArte> obrasEnExpo = infoExpo.getObras(); // Suponiendo que tienes un getObras()
+        
+        if (obrasEnExpo.isEmpty()) {
+            System.out.println("Esta exposición aún no tiene obras asignadas.");
+        } else {
+            // Si hay obras, las recorremos y mostramos
+            for (ObraArte obra : obrasEnExpo) {
+                System.out.println(" -> ID Obra: " + obra.getId() + " | Título: " + obra.getTitulo() + " | Artista: " + obra.getArtista());
+            }
+        }
+        System.out.println("------------------------------------");
+        
+    } 
+    else {
+    
+        System.out.println("\nError: No se encontró ninguna exposición con el ID " + id + ".");
+   
+        }
+}
+        
+        
+        
+        
+        
+        
+        
+ 
+            
+
+   
+   
    
     
     
