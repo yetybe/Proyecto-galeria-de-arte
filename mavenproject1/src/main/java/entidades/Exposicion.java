@@ -11,6 +11,9 @@ public class Exposicion {
     
     private int id;
     private List<ObraArte> obrasExhibidas; 
+    private String nombre;
+    private String fechaInicio;
+    private String fechaFin;
     
     public Exposicion(int id) {
         this.id = id;
@@ -59,6 +62,8 @@ public class Exposicion {
     public boolean contieneObra(ObraArte obra) {
         return obrasExhibidas.contains(obra);
     }
+    
+    
     
    
 }
