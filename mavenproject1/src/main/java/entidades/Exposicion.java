@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 
+
 public class Exposicion {
     
     private int id;
@@ -15,19 +16,49 @@ public class Exposicion {
     private String fechaInicio;
     private String fechaFin;
     
-    public Exposicion(int id) {
+    public Exposicion(int id , String nombre , String fechaInicio , String fechaFin ) {
         this.id = id;
         this.obrasExhibidas = new ArrayList<>();
+        this.nombre = nombre;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        
     }
     
     public int getId() {
         return id;
     }
     
+    public String getNombre(){
+        
+       return nombre;
+    }
+    
+    public String getFechaIn(){
+        
+       return fechaInicio;
+    }
+    
+    public String getFechaFin(){
+        
+       return fechaFin;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
     
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+     
+    public void setFechaIn(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+    
+     public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
+    }
   
      public List<ObraArte> getObras() {
         return new ArrayList<>(obrasExhibidas); 
@@ -63,6 +94,10 @@ public class Exposicion {
         return obrasExhibidas.contains(obra);
     }
     
+    
+
+            
+           
     
     
    
