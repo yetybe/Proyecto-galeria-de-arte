@@ -86,7 +86,7 @@ public class Main {
         System.out.println("Ingrese precio de la Obra :");
         float precio = Float.parseFloat(scan.readLine());
         
-        ObraArte nuevaObra = new ObraArte(id, titulo, artist, ano, precio, true);
+        ObraArte nuevaObra = new ObraArte(id, titulo, artist, ano, precio);
         obras.add(nuevaObra);
         
         for(Artista aux: artistas)
