@@ -205,11 +205,11 @@ public class Main {
      
         Exposicion exposicionEliminada = exposiciones.remove(id);
         
-        System.out.println("\n¡Éxito! La exposición '" + exposicionEliminada.getNombre() + "' (ID: " + idParaEliminar + ") ha sido eliminada.");
+        System.out.println("\n¡Éxito! La exposición '" + exposicionEliminada.getNombre() + "' (ID: " + id + ") ha sido eliminada.");
         
     } else {
         
-        System.out.println("\nError: No se encontró ninguna exposición con el ID " + idParaEliminar + ".");
+        System.out.println("\nError: No se encontró ninguna exposición con el ID " + id + ".");
     }
     
     
