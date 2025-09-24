@@ -3,13 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package edu.pucv.mavenproject1;
-
+import java.util.*;
+import entidades.Artista;
+import entidades.ObraArte;
 /**
  *
  * @author dmena
  */
 public class MenuPrincipal extends javax.swing.JFrame {
- 
+    private ArrayList<Artista> listaArtistas;
+    private ArrayList<ObraArte> listaObras;
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -59,24 +63,44 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboFunciones;
     // End of variables declaration//GEN-END:variables
     
-    public MenuPrincipal() {
+    public MenuPrincipal(ArrayList<Artista> listaArt, ArrayList<ObraArte> listaObr) {
+        this.listaArtistas = listaArt;
+        this.listaObras = listaObr;
         initComponents();
         configurarComponentes(); // Agregar esta línea
     }
     
+    public MenuPrincipal() {
+        this.listaArtistas = new ArrayList<>(); // Lista vacía por defecto
+        this.listaObras = new ArrayList<>();    // Lista vacía por defecto
+        initComponents();
+        configurarComponentes();
+    }
+    
+    public ArrayList<Artista> getListaArtistas()
+    {
+        return listaArtistas;
+    }
+    
+    public ArrayList<ObraArte> getListaObras()
+    {
+        return listaObras;
+    }
+    
     private void configurarComponentes() {
-        // Configurar las opciones del ComboBox
+        // Configurar ComboBox
         String[] opciones = {"Seleccione función", "Agregar Elemento", "Editar Elemento", "Eliminar Elemento"};
         comboFunciones.setModel(new javax.swing.DefaultComboBoxModel<>(opciones));
-        
-        // Agregar action listener al botón
+    
+        // Configurar botón Ejecutar (CORREGIDO)
         btnEjecutar.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEjecutarActionPerformed(evt);
             }
         });
-        
+    
+        // Configurar botón Salir (CORREGIDO)
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +114,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         switch(opcion) {
             case "Agregar Elemento":
-                new VentanaAgregar(this, true).setVisible(true);
+                VentanaAgregar ventana = new VentanaAgregar(listaArtistas, listaObras);
+                ventana.setVisible(true);
                 break;
             case "Editar Elemento":
                 new VentanaEditar(this, true).setVisible(true);
@@ -117,15 +142,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }
     
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
+        ArrayList<Artista> artistas = new ArrayList<>();
+        ArrayList<ObraArte> obras = new ArrayList<>();
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
-            public void run()
-            {
-                new MenuPrincipal().setVisible(true);
+            public void run() {
+                
+                new MenuPrincipal(artistas, obras).setVisible(true);
             }
         });
     }
