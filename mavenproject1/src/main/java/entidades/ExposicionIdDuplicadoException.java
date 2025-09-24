@@ -10,6 +10,6 @@ package entidades;
  */
 public class ExposicionIdDuplicadoException extends Exception {
     public ExposicionIdDuplicadoException(String mensaje) {
-        super(mensaje); // Llama al constructor de la clase padre (Exception)
+        super(mensaje); 
     }
 }
