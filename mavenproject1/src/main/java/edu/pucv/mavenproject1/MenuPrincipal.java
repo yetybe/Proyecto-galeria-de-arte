@@ -5,7 +5,11 @@
 package edu.pucv.mavenproject1;
 import java.util.*;
 import entidades.Artista;
+import entidades.Exposicion;
 import entidades.ObraArte;
+import entidades.LectorCVS;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 /**
  *
  * @author dmena
@@ -13,6 +17,7 @@ import entidades.ObraArte;
 public class MenuPrincipal extends javax.swing.JFrame {
     private ArrayList<Artista> listaArtistas;
     private ArrayList<ObraArte> listaObras;
+    private Map<Integer, Exposicion> exposiciones = new HashMap<>();
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -62,34 +67,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> comboFunciones;
     // End of variables declaration//GEN-END:variables
-    
-    public MenuPrincipal(ArrayList<Artista> listaArt, ArrayList<ObraArte> listaObr) {
-        this.listaArtistas = listaArt;
-        this.listaObras = listaObr;
-        initComponents();
-        configurarComponentes(); // Agregar esta línea
-    }
-    
+
     public MenuPrincipal() {
-        this.listaArtistas = new ArrayList<>(); // Lista vacía por defecto
-        this.listaObras = new ArrayList<>();    // Lista vacía por defecto
+        this.listaArtistas = new ArrayList<>();
+        this.listaObras = new ArrayList<>();
+        this.exposiciones = new HashMap<>();
         initComponents();
         configurarComponentes();
     }
     
-    public ArrayList<Artista> getListaArtistas()
-    {
-        return listaArtistas;
-    }
-    
-    public ArrayList<ObraArte> getListaObras()
-    {
-        return listaObras;
-    }
-    
     private void configurarComponentes() {
         // Configurar ComboBox
-        String[] opciones = {"Seleccione función", "Agregar Elemento", "Editar Elemento", "Eliminar Elemento"};
+        String[] opciones = {"Seleccione función", "Cargar Archivos","Agregar Elemento", "Editar Elemento", "Eliminar Elemento"};
         comboFunciones.setModel(new javax.swing.DefaultComboBoxModel<>(opciones));
     
         // Configurar botón Ejecutar (CORREGIDO)
@@ -117,6 +106,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 VentanaAgregar ventana = new VentanaAgregar(listaArtistas, listaObras);
                 ventana.setVisible(true);
                 break;
+            case "Cargar Archivos":
+                cargarDatosCSV();
+                break;
             case "Editar Elemento":
                 new VentanaEditar(this, true).setVisible(true);
                 break;
@@ -142,6 +134,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }
     
+    private void cargarDatosCSV()
+    {
+        try {
+            Map<String, Object> datos = LectorCVS.leerDatosDesdeCSV();
+            
+            ArrayList<Artista> artistasCargados = (ArrayList<Artista>) datos.get("artistas");
+            ArrayList<ObraArte> obrasCargadas = (ArrayList<ObraArte>) datos.get("obras");
+            
+            this.listaArtistas.addAll(artistasCargados);
+            this.listaObras.addAll(obrasCargadas);
+            
+            JOptionPane.showMessageDialog(this,"Datos cargados exitosamente!\n" + "Artistas: " + artistasCargados.size() + "\n" + "Obras: " + obrasCargadas.size(),"Éxito", JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (IOException e) 
+        {
+        JOptionPane.showMessageDialog(this,"Error al cargar el CSV:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     public static void main(String args[]) {
         
         ArrayList<Artista> artistas = new ArrayList<>();
@@ -151,7 +162,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             @Override
             public void run() {
                 
-                new MenuPrincipal(artistas, obras).setVisible(true);
+                new MenuPrincipal().setVisible(true);
             }
         });
     }
