@@ -66,6 +66,7 @@ public class Exposicion {
     
     
     public boolean agregarObra(ObraArte obra) {
+       
         if (obra == null) {
             return false; 
         }
@@ -79,10 +80,21 @@ public class Exposicion {
         
         return obrasExhibidas.add(obra);
     }
+  
 
     
     public boolean eliminarObra(int idObra) {
         return obrasExhibidas.removeIf(obra -> obra.getId() == idObra);
+    }
+    
+    //Sobrecarga de métodos: elimina por titulo
+    public boolean eliminarObra(String titulo) {
+        if (titulo == null || titulo.trim().isEmpty()) {
+            System.err.println("El título no puede ser nulo ni vacío.");
+            return false;
+        }
+
+        return obrasExhibidas.removeIf(obra -> obra.getTitulo().equalsIgnoreCase(titulo));
     }
     
     // Métodos adicionales útiles
