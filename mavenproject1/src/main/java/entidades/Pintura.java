@@ -16,7 +16,7 @@ public class Pintura extends ObraArte
     
     public Pintura(int id, String titulo, String artista, int ano, float precio,String estilo, String soporte, String dimensiones2D)
     {
-        super(id, titulo, artista, ano, precio);
+        super(id, titulo, artista, ano, precio , true );
         this.estilo = estilo;
         this.soporte = soporte;
         this.dimensiones2D = dimensiones2D;
