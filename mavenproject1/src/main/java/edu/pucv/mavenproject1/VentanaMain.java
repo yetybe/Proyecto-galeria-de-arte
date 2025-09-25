@@ -58,6 +58,11 @@ public class VentanaMain extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jMenu3.setText("Agregar Obra");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenu3);
 
         jMenu5.setText("Crear Exposicion");
@@ -88,6 +93,13 @@ public class VentanaMain extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+
+        VentanaAgregar ventanaDeAgregar = new VentanaAgregar();
+        ventanaDeAgregar.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenu3ActionPerformed
 
     /**
      * @param args the command line arguments
