@@ -67,34 +67,82 @@ public class Exposicion {
     
     public boolean agregarObra(ObraArte obra) {
        
-        if (obra == null) {
-            return false; 
-        }
-        if (obrasExhibidas.contains(obra)) {
+        try {
+            if (obra == null) {
+                throw new IllegalArgumentException("La obra no puede ser nula.");
+            }
+            if (obrasExhibidas.contains(obra)) {
+                throw new IllegalStateException("La obra ya está en la exposición.");
+            }
+            if (!obra.getDisponibilidad()) {
+                throw new IllegalStateException("La obra no está disponible para exhibirse.");
+            }
+
+            boolean agregada = obrasExhibidas.add(obra);
+            if (agregada) {
+                System.out.println("Obra agregada exitosamente: " + obra.getTitulo());
+            }
+            return agregada;
+
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error al agregar obra - Dato inválido: " + e.getMessage());
+            return false;
+        } catch (IllegalStateException e) {
+            System.err.println("Error al agregar obra - Estado inválido: " + e.getMessage());
             return false;
         }
         
-        if (!obra.getDisponibilidad()) {
-            return false; 
-        }
-        
-        return obrasExhibidas.add(obra);
     }
   
 
     
     public boolean eliminarObra(int idObra) {
-        return obrasExhibidas.removeIf(obra -> obra.getId() == idObra);
+        try {
+            if (idObra <= 0) {
+                throw new IllegalArgumentException("El ID debe ser mayor a 0.");
+            }
+
+            boolean eliminada = obrasExhibidas.removeIf(obra -> obra.getId() == idObra);
+
+            if (!eliminada) {
+                throw new IllegalStateException("No se encontró ninguna obra con ID: " + idObra);
+            }
+
+            System.out.println("Obra eliminada exitosamente con ID: " + idObra);
+            return true;
+
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error al eliminar obra - ID inválido: " + e.getMessage());
+            return false;
+        } catch (IllegalStateException e) {
+            System.err.println("Error al eliminar obra - No encontrada: " + e.getMessage());
+            return false;
+        }
     }
     
     //Sobrecarga de métodos: elimina por titulo
     public boolean eliminarObra(String titulo) {
-        if (titulo == null || titulo.trim().isEmpty()) {
-            System.err.println("El título no puede ser nulo ni vacío.");
+        try {
+            if (titulo == null || titulo.trim().isEmpty()) {
+                throw new IllegalArgumentException("El título no puede ser nulo ni vacío.");
+            }
+
+            boolean eliminada = obrasExhibidas.removeIf(obra -> obra.getTitulo().equalsIgnoreCase(titulo));
+
+            if (!eliminada) {
+                throw new IllegalStateException("No se encontró ninguna obra con título: " + titulo);
+            }
+
+            System.out.println("Obra eliminada exitosamente con título: " + titulo);
+            return true;
+
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error al eliminar obra - Título inválido: " + e.getMessage());
+            return false;
+        } catch (IllegalStateException e) {
+            System.err.println("Error al eliminar obra - No encontrada: " + e.getMessage());
             return false;
         }
-
-        return obrasExhibidas.removeIf(obra -> obra.getTitulo().equalsIgnoreCase(titulo));
     }
     
     // Métodos adicionales útiles
