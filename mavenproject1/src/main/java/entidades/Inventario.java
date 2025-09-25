@@ -23,12 +23,7 @@ public class Inventario {
          
     }
      
-    
-    /* public void agregarObra(ObraArte obra) {
-    if (obra == null) return ;
-    obrasInventario.put(obra.getId(), obra); 
-    }*/
-    
+ 
     public void agregarObra(ObraArte obra) {
     try {
         if (obra == null) {
@@ -52,11 +47,46 @@ public class Inventario {
 }
     
     public void  eliminarObra(int idObra) { 
-        obrasInventario.remove(idObra);
+    try{
+        if(idObra <= 0) {
+            throw new IllegalArgumentException("El ID debe ser mayor a 0");
+        }
+        if(!obrasInventario.containsKey(idObra)){
+            throw new IllegalStateException("No existe una obra con el ID: " + idObra);
+        }
+   
+        ObraArte obraEliminada = obrasInventario.remove(idObra);
+        System.out.println("Obra eliminada exitosamente: " + obraEliminada.getTitulo());
+            
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error al eliminar obra - ID inválido: " + e.getMessage());
+        } catch (IllegalStateException e) {
+            System.err.println("Error al eliminar obra - No encontrada: " + e.getMessage());
+        }
     }
     
     public ObraArte buscarObra(int idObra) { 
-        return obrasInventario.get(idObra);
+    try {
+        if (idObra <= 0) {
+            throw new IllegalArgumentException("El ID debe ser mayor a 0");
+        }
+            
+        ObraArte obra = obrasInventario.get(idObra);
+            
+        if (obra == null) {
+            throw new IllegalStateException("No se encontró ninguna obra con el ID: " + idObra);
+        }
+            
+        System.out.println("Obra encontrada: " + obra.getTitulo());
+        return obra;
+            
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error en búsqueda - ID inválido: " + e.getMessage());
+            return null;
+        } catch (IllegalStateException e) {
+            System.err.println("Error en búsqueda - No encontrada: " + e.getMessage());
+            return null;
+        }
     }
     
     //Sobrecarga de métodos: busca por ID y verifica si está disponible 
