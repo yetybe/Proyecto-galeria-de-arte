@@ -19,7 +19,7 @@ public class Main {
     // Listas para almacenar los datos
     private static List<Artista> artistas = new ArrayList<>();
     private static List<ObraArte> obras = new ArrayList<>();
-    private static Map<Integer, Exposicion> exposiciones = new HashMap<>()
+    private static Map<Integer, Exposicion> exposiciones = new HashMap<>();
     
     public static void mostrarMenu() {
         System.out.println("\n--------Menu Galeria--------");
@@ -86,7 +86,7 @@ public class Main {
         System.out.println("Ingrese precio de la Obra :");
         float precio = Float.parseFloat(scan.readLine());
         
-        ObraArte nuevaObra = new ObraArte(id, titulo, artist, ano, precio);
+        ObraArte nuevaObra = new ObraArte(id, titulo, artist, ano, precio, true);
         obras.add(nuevaObra);
         
         for(Artista aux: artistas)
