@@ -23,7 +23,7 @@ public class LectorCVS
         ArrayList<ObraArte> obras = new ArrayList<>();
         Map<Integer, Artista> mapaArtistas = new HashMap<>();
         
-        BufferedReader br = new BufferedReader(new FileReader(""));
+        BufferedReader br = new BufferedReader(new FileReader("datosGaleria.csv"));
         String linea;
         boolean primeraLinea = true;
             
@@ -35,7 +35,7 @@ public class LectorCVS
             }
             String[] datos = linea.split(",");
             
-            if (datos.length >= 6) 
+            if (datos.length >= 10) 
             {
                     
                 int idArtista = Integer.parseInt(datos[0]);
@@ -46,6 +46,10 @@ public class LectorCVS
                 String tituloObra = datos[4];
                 int anioObra = Integer.parseInt(datos[5]);
                 float precioObra = Float.parseFloat(datos[6]);
+                String tipoObra = datos[7];
+                String caracteristica1 = datos[8];
+                String caracteristica2 = datos[9];
+                String caracteristica3 = datos.length > 10 ? datos[10] : "";
                 
                 Artista artista;
                 if (mapaArtistas.containsKey(idArtista)) 
@@ -58,8 +62,18 @@ public class LectorCVS
                     artistas.add(artista);
                     mapaArtistas.put(idArtista, artista);
                 }
-                ObraArte obra = new ObraArte(idObra, tituloObra, artista.getNombre(), anioObra, precioObra, true);
+                
+                ObraArte obra;
+                if("Pintura".equals(tipoObra))
+                {
+                    obra = new Pintura(idObra, tituloObra, artista.getNombre(), anioObra, precioObra, caracteristica1, caracteristica2, caracteristica3);
+                }
+                else
+                {
+                    obra = new Escultura(idObra, tituloObra, artista.getNombre(), anioObra, precioObra,caracteristica1, caracteristica2, caracteristica3);
+                }
                 obras.add(obra);
+                artista.agregarObra(obra);
             }
         }
         Map<String, Object> resultado = new HashMap<>();
