@@ -24,10 +24,32 @@ public class Inventario {
     }
      
     
-    public void agregarObra(ObraArte obra) {
+    /* public void agregarObra(ObraArte obra) {
     if (obra == null) return ;
     obrasInventario.put(obra.getId(), obra); 
-    }
+    }*/
+    
+    public void agregarObra(ObraArte obra) {
+    try {
+        if (obra == null) {
+            throw new IllegalArgumentException("La obra no puede ser nula");
+        }
+        if (obra.getId() <= 0) {
+            throw new IllegalArgumentException("El ID debe ser mayor a 0");
+        }
+        if (obrasInventario.containsKey(obra.getId())) {
+            throw new IllegalStateException("Ya existe una obra con ID: " + obra.getId());
+        }
+        
+        obrasInventario.put(obra.getId(), obra);
+        System.out.println("Obra agregada: " + obra.getTitulo());
+        
+    } catch (IllegalArgumentException | IllegalStateException e) {
+        
+        System.err.println("Error al agregar obra: " + e.getMessage());
+    } 
+
+}
     
     public void  eliminarObra(int idObra) { 
         obrasInventario.remove(idObra);
