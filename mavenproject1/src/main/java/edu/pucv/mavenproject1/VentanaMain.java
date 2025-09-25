@@ -4,6 +4,8 @@
  */
 package edu.pucv.mavenproject1;
 
+import edu.pucv.mavenproject1.VentanaAgregar;
+
 /**
  *
  * @author tomas
