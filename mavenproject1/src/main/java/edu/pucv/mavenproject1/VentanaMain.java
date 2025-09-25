@@ -35,9 +35,14 @@ public class VentanaMain extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu8 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
+        jMenu11 = new javax.swing.JMenu();
+        jMenu9 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
         jScrollPane2.setViewportView(jTextPane1);
@@ -54,8 +59,11 @@ public class VentanaMain extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("GALERIA DE ARTE");
+        jTextArea1.setText("\n\n\tGALERIA DE ARTE");
         jScrollPane1.setViewportView(jTextArea1);
+
+        jMenu8.setText("Cargar Datos");
+        jMenuBar1.add(jMenu8);
 
         jMenu3.setText("Agregar Obra");
         jMenu3.addActionListener(new java.awt.event.ActionListener() {
@@ -68,8 +76,20 @@ public class VentanaMain extends javax.swing.JFrame {
         jMenu5.setText("Crear Exposicion");
         jMenuBar1.add(jMenu5);
 
-        jMenu6.setText("Eliminar Exposicion");
+        jMenu7.setText("Editar ");
+        jMenuBar1.add(jMenu7);
+
+        jMenu6.setText("Eliminar ");
         jMenuBar1.add(jMenu6);
+
+        jMenu10.setText("Reportes");
+        jMenuBar1.add(jMenu10);
+
+        jMenu11.setText("Ventas");
+        jMenuBar1.add(jMenu11);
+
+        jMenu9.setText("Salir");
+        jMenuBar1.add(jMenu9);
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -79,16 +99,16 @@ public class VentanaMain extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addGap(259, 259, 259)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(320, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addGap(112, 112, 112)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(173, Short.MAX_VALUE))
         );
 
         pack();
@@ -138,11 +158,16 @@ public class VentanaMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
