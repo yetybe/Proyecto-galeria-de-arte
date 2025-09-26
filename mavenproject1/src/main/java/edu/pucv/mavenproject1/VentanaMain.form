@@ -66,11 +66,6 @@
             <Property name="text" type="java.lang.String" value="Editar "/>
           </Properties>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu6">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Eliminar "/>
-          </Properties>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu10">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reportes"/>
@@ -79,6 +74,11 @@
         <Menu class="javax.swing.JMenu" name="jMenu11">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ventas"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu6">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Eliminar "/>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu9">
@@ -126,7 +126,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="103" max="-2" attributes="0"/>
-              <EmptySpace pref="173" max="32767" attributes="0"/>
+              <EmptySpace pref="174" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

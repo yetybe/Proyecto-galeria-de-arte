@@ -41,9 +41,9 @@ public class VentanaMain extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
         jMenu10 = new javax.swing.JMenu();
         jMenu11 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
         jMenu9 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
@@ -81,14 +81,14 @@ public class VentanaMain extends javax.swing.JFrame {
         jMenu7.setText("Editar ");
         jMenuBar1.add(jMenu7);
 
-        jMenu6.setText("Eliminar ");
-        jMenuBar1.add(jMenu6);
-
         jMenu10.setText("Reportes");
         jMenuBar1.add(jMenu10);
 
         jMenu11.setText("Ventas");
         jMenuBar1.add(jMenu11);
+
+        jMenu6.setText("Eliminar ");
+        jMenuBar1.add(jMenu6);
 
         jMenu9.setText("Salir");
         jMenuBar1.add(jMenu9);
@@ -110,7 +110,7 @@ public class VentanaMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(112, 112, 112)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
 
         pack();
