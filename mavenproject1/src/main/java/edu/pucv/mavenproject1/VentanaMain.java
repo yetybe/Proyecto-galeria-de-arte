@@ -183,7 +183,13 @@ public class VentanaMain extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
                 // Aquí puedes agregar la lógica para reportes
-                JOptionPane.showMessageDialog(VentanaMain.this, "Función Reportes - Por implementar");
+                //JOptionPane.showMessageDialog(VentanaMain.this, "Función Reportes - Por implementar");
+                if (listaArtistas.isEmpty()) {
+                    JOptionPane.showMessageDialog(VentanaMain.this, "Primero cargue datos CSV");
+                    return;
+                }
+                VentanaReportes ventanaReportes = new VentanaReportes(listaArtistas, listaObras, exposiciones);
+                ventanaReportes.setVisible(true);
             }
         });
         
