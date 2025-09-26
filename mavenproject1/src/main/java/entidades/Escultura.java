@@ -13,6 +13,7 @@ public class Escultura extends ObraArte
     private String material;
     private String peso;
     private String dimensiones3D;
+    private String tipo = "Escultura";
     
     public Escultura(int id, String titulo, String artista, int ano, float precio,String material, String peso, String dimensiones3D)
     {
@@ -30,4 +31,12 @@ public class Escultura extends ObraArte
     
     public String getDimensiones3D(){ return dimensiones3D; }
     public void setDimensiones3D(String dimensiones3D){ this.dimensiones3D = dimensiones3D; }
+    
+    public String getTipo(){ return tipo; }
+    
+    @Override
+    public String getDescripcion()
+    {
+        return  Integer.toString(this.getId()) + " - " + this.getTitulo() + " - " + this.getAnio() + " - " + tipo + " - "+ material + " - " + peso + " - " + dimensiones3D;
+    }
 }
