@@ -30,9 +30,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         comboFunciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        btnEjecutar.setText("jButton1");
+        btnEjecutar.setText("Ejecutar");
 
-        btnSalir.setText("jButton2");
+        btnSalir.setText("Salir");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -42,7 +42,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(comboFunciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSalir)
-                .addGap(0, 235, Short.MAX_VALUE))
+                .addGap(0, 258, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnEjecutar)
@@ -103,6 +103,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         switch(opcion) {
             case "Agregar Elemento":
+                if (listaArtistas.isEmpty())
+                {
+                    JOptionPane.showMessageDialog(this, "Primero cargue datos CSV");
+                    return;
+                }
                 VentanaAgregar ventana = new VentanaAgregar(listaArtistas, listaObras);
                 ventana.setVisible(true);
                 break;
@@ -110,10 +115,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 cargarDatosCSV();
                 break;
             case "Editar Elemento":
-                new VentanaEditar(this, true).setVisible(true);
+                //new VentanaEditar(this, true).setVisible(true);
                 break;
             case "Eliminar Elemento":
-                new VentanaEliminar(this, true).setVisible(true);
+                //new VentanaEliminar(this, true).setVisible(true);
                 break;
             default:
                 javax.swing.JOptionPane.showMessageDialog(this, "Seleccione una función válida");
@@ -154,9 +159,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
     
     public static void main(String args[]) {
-        
-        ArrayList<Artista> artistas = new ArrayList<>();
-        ArrayList<ObraArte> obras = new ArrayList<>();
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
