@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class VentanaEliminar extends javax.swing.JFrame {
     private ArrayList<Artista> listaArtistas;
-    private ArrayList<ObraArte> listaObras;
+    private ArrayList<ObraArte> listObras;
     /**
      * Creates new form VentanaEliminar
      */
@@ -24,7 +24,7 @@ public class VentanaEliminar extends javax.swing.JFrame {
     
     public VentanaEliminar(ArrayList<Artista> listaArtistas, ArrayList<ObraArte> listaObras) {
         this.listaArtistas = listaArtistas;
-        this.listaObras = listaObras;
+        this.listObras = listaObras;
         initComponents();
         configurarComponentes();
     }
@@ -33,115 +33,157 @@ public class VentanaEliminar extends javax.swing.JFrame {
     {
         listaObras.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         
-        // Llenar combo de artistas
         llenarComboArtistas();
         
-        // Panel de obras inicialmente invisible
         panelObrasArtista.setVisible(false);
         
-        // Listeners
-        comboArtistas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        comboArtistas.addActionListener(new java.awt.event.ActionListener()
+        {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cambiarArtista();
             }
         });
         
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnEliminar.addActionListener(new java.awt.event.ActionListener()
+        {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 eliminarObra();
             }
         });
         
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCancelar.addActionListener(new java.awt.event.ActionListener()
+        {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 dispose();
             }
         });
     }
     
-    private void llenarComboArtistas() {
+    private void llenarComboArtistas()
+    {
         comboArtistas.removeAllItems();
         comboArtistas.addItem("Seleccione un artista");
         
-        if (listaArtistas != null && !listaArtistas.isEmpty()) {
-            for (Artista artista : listaArtistas) {
+        if (listaArtistas != null && !listaArtistas.isEmpty())
+        {
+            for (Artista artista : listaArtistas)
+            {
                 comboArtistas.addItem(artista.getNombre());
             }
-        } else {
+        }
+        else
+        {
             comboArtistas.addItem("No hay artistas cargados");
         }
     }
     
-    private void cambiarArtista() {
-        if (comboArtistas.getSelectedIndex() > 0) {
+    private void cambiarArtista()
+    {
+        if (comboArtistas.getSelectedIndex() > 0)
+        {
             String nombreArtista = (String) comboArtistas.getSelectedItem();
-            if (!nombreArtista.equals("No hay artistas cargados")) {
+            if (!nombreArtista.equals("No hay artistas cargados"))
+            {
                 mostrarObrasDelArtista(nombreArtista);
                 panelObrasArtista.setVisible(true);
             }
-        } else {
+        }
+        else
+        {
             panelObrasArtista.setVisible(false);
         }
     }
     
-    private void mostrarObrasDelArtista(String nombreArtista) {
+    private void mostrarObrasDelArtista(String nombreArtista)
+    {
         Artista artista = buscarArtistaPorNombre(nombreArtista);
-        if (artista != null && !artista.getObras().isEmpty()) {
+        if (artista != null && !artista.getObras().isEmpty())
+        {
             ArrayList<String> obrasTexto = new ArrayList<>();
-            for (ObraArte obra : artista.getObras()) {
+            for (ObraArte obra : artista.getObras())
+            {
                 String tipo = (obra instanceof Pintura) ? "Pintura" : "Escultura";
                 obrasTexto.add(obra.getTitulo() + " (" + obra.getAnio() + ") - " + tipo);
             }
             listaObras.setListData(obrasTexto.toArray(new String[0]));
-        } else {
+        }
+        else 
+        {
             listaObras.setListData(new String[]{"No hay obras para este artista"});
             btnEliminar.setEnabled(false);
         }
     }
     
-    private Artista buscarArtistaPorNombre(String nombre) {
-        for (Artista artista : listaArtistas) {
-            if (artista.getNombre().equals(nombre)) {
+    private Artista buscarArtistaPorNombre(String nombre)
+    {
+        for (Artista artista : listaArtistas)
+        {
+            if (artista.getNombre().equals(nombre))
+            {
                 return artista;
             }
         }
         return null;
     }
     
-    private void eliminarObra() {
-        if (comboArtistas.getSelectedIndex() <= 0) {
+    private void eliminarObra()
+    {
+        if (comboArtistas.getSelectedIndex() <= 0)
+        {
             JOptionPane.showMessageDialog(this, "Seleccione un artista primero");
             return;
         }
         
         String nombreArtista = (String) comboArtistas.getSelectedItem();
-        if (nombreArtista.equals("No hay artistas cargados")) {
+        if (nombreArtista.equals("No hay artistas cargados"))
+        {
             JOptionPane.showMessageDialog(this, "No hay artistas cargados en el sistema");
             return;
         }
         
         int indiceObra = listaObras.getSelectedIndex();
-        if (indiceObra == -1) {
+        if (indiceObra == -1)
+        {
             JOptionPane.showMessageDialog(this, "Seleccione una obra de la lista");
             return;
         }
         
         Artista artista = buscarArtistaPorNombre(nombreArtista);
-        if (artista == null || artista.getObras().isEmpty()) {
+        if (artista == null || artista.getObras().isEmpty())
+        {
             JOptionPane.showMessageDialog(this, "No se encontraron obras para este artista");
             return;
         }
         
         ObraArte obraAEliminar = artista.getObras().get(indiceObra);
         
-        // Abrir ventana de confirmación separada
-        VentanaConfirmarEliminar ventanaConfirmar = new VentanaConfirmarEliminar(
-            this, artista, obraAEliminar, listaObras);
+        VentanaConfirmarEliminar ventanaConfirmar = new VentanaConfirmarEliminar(artista, obraAEliminar);
         ventanaConfirmar.setVisible(true);
+    
+        int respuesta = JOptionPane.showConfirmDialog(this,
+            "¿Está seguro de eliminar esta obra permanentemente?",
+            "Confirmar Eliminación",
+            JOptionPane.YES_NO_OPTION
+        );
+    
+        if (respuesta == JOptionPane.YES_OPTION) 
+        {
+            artista.eliminarObra(obraAEliminar.getId());
+            listObras.remove(obraAEliminar);
+            JOptionPane.showMessageDialog(this, "✅ Obra eliminada exitosamente");
+            actualizarListaObras();
+        }
     }
     
     // Método para que VentanaConfirmarEliminar pueda actualizar la lista
-    public void actualizarListaObras() {
+    public void actualizarListaObras()
+    {
         if (comboArtistas.getSelectedIndex() > 0) {
             String nombreArtista = (String) comboArtistas.getSelectedItem();
             mostrarObrasDelArtista(nombreArtista);
