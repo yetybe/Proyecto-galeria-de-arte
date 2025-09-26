@@ -13,6 +13,7 @@ public class Pintura extends ObraArte
     private String estilo;
     private String soporte;
     private String dimensiones2D;
+    private String tipo = "Pintura";
     
     public Pintura(int id, String titulo, String artista, int ano, float precio,String estilo, String soporte, String dimensiones2D)
     {
@@ -30,4 +31,12 @@ public class Pintura extends ObraArte
     
     public String getDimensiones2D(){ return dimensiones2D; }
     public void setDimensiones2D(String dimensiones2D){ this.dimensiones2D = dimensiones2D; }
+    
+    public String getTipo(){ return tipo; }
+    
+    @Override
+    public String getDescripcion()
+    {
+        return  Integer.toString(this.getId()) + " - " + this.getTitulo() + " - " + this.getAnio() + " - " + tipo + " - "+ estilo + " - " + soporte + " - " + dimensiones2D;
+    }
 }
