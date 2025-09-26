@@ -4,20 +4,37 @@
  */
 package edu.pucv.mavenproject1;
 
-import edu.pucv.mavenproject1.VentanaAgregar;
+import entidades.Artista;
+import entidades.Exposicion;
+import entidades.ObraArte;
+import entidades.LectorCVS;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author tomas
  */
 public class VentanaMain extends javax.swing.JFrame {
+    private ArrayList<Artista> listaArtistas;
+    private ArrayList<ObraArte> listaObras;
+    private Map<Integer, Exposicion> exposiciones = new HashMap<>();
 
     /**
      * Creates new form VentanaMain
      */
-    public VentanaMain() {
+    public VentanaMain(){
+        this.listaArtistas = new ArrayList<>();
+        this.listaObras = new ArrayList<>();
+        this.exposiciones = new HashMap<>();
         initComponents();
+        configurarMenuListeners();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,17 +51,16 @@ public class VentanaMain extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu8 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
-        jMenu10 = new javax.swing.JMenu();
-        jMenu11 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
-        jMenu9 = new javax.swing.JMenu();
+        menuCargarDatos = new javax.swing.JMenu();
+        menuAgregarObra = new javax.swing.JMenu();
+        menuCrearExposicion = new javax.swing.JMenu();
+        menuEditar = new javax.swing.JMenu();
+        menuReportes = new javax.swing.JMenu();
+        menuVentas = new javax.swing.JMenu();
+        menuEliminar = new javax.swing.JMenu();
+        menuSalir = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
         jScrollPane2.setViewportView(jTextPane1);
@@ -59,39 +75,37 @@ public class VentanaMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("\n\n\tGALERIA DE ARTE");
-        jScrollPane1.setViewportView(jTextArea1);
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setText("GALERIA DE ARTE");
 
-        jMenu8.setText("Cargar Datos");
-        jMenuBar1.add(jMenu8);
+        menuCargarDatos.setText("Cargar Datos");
+        jMenuBar1.add(menuCargarDatos);
 
-        jMenu3.setText("Agregar Obra");
-        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+        menuAgregarObra.setText("Agregar Obra");
+        menuAgregarObra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu3ActionPerformed(evt);
+                menuAgregarObraActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(menuAgregarObra);
 
-        jMenu5.setText("Crear Exposicion");
-        jMenuBar1.add(jMenu5);
+        menuCrearExposicion.setText("Crear Exposicion");
+        jMenuBar1.add(menuCrearExposicion);
 
-        jMenu7.setText("Editar ");
-        jMenuBar1.add(jMenu7);
+        menuEditar.setText("Editar ");
+        jMenuBar1.add(menuEditar);
 
-        jMenu10.setText("Reportes");
-        jMenuBar1.add(jMenu10);
+        menuReportes.setText("Reportes");
+        jMenuBar1.add(menuReportes);
 
-        jMenu11.setText("Ventas");
-        jMenuBar1.add(jMenu11);
+        menuVentas.setText("Ventas");
+        jMenuBar1.add(menuVentas);
 
-        jMenu6.setText("Eliminar ");
-        jMenuBar1.add(jMenu6);
+        menuEliminar.setText("Eliminar ");
+        jMenuBar1.add(menuEliminar);
 
-        jMenu9.setText("Salir");
-        jMenuBar1.add(jMenu9);
+        menuSalir.setText("Salir");
+        jMenuBar1.add(menuSalir);
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -101,28 +115,179 @@ public class VentanaMain extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(259, 259, 259)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(320, Short.MAX_VALUE))
+                .addGap(263, 263, 263)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(400, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addGap(153, 153, 153)
+                .addComponent(jLabel1)
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+    private void menuAgregarObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgregarObraActionPerformed
+        
+    }//GEN-LAST:event_menuAgregarObraActionPerformed
+                                         
 
-        VentanaAgregar ventanaDeAgregar = new VentanaAgregar();
+    private void configurarMenuListeners()
+    {
+        // Configurar menú "Cargar Datos"
+        menuCargarDatos.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                cargarDatosCSV();
+            }
+        });
+        
+        // Configurar menú "Agregar Obra" 
+        menuAgregarObra.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                abrirVentanaAgregar();
+            }
+        });
+        
+        // Configurar menú "Crear Exposicion"
+        menuCrearExposicion.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                // Aquí puedes agregar la lógica para crear exposición
+                JOptionPane.showMessageDialog(VentanaMain.this, "Función Crear Exposición - Por implementar");
+            }
+        });
+        
+        // Configurar menú "Editar"
+        menuEditar.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                abrirVentanaEditar();
+            }
+        });
+        
+        // Configurar menú "Reportes"
+        menuReportes.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                // Aquí puedes agregar la lógica para reportes
+                JOptionPane.showMessageDialog(VentanaMain.this, "Función Reportes - Por implementar");
+            }
+        });
+        
+        // Configurar menú "Eliminar" - AHORA CON MOUSELISTENER
+        menuEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                abrirVentanaEliminar();
+            }
+        });
+        
+        // Configurar menú "Ventas"
+        menuVentas.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                // Aquí puedes agregar la lógica para ventas
+                JOptionPane.showMessageDialog(VentanaMain.this, "Función Ventas - Por implementar");
+            }
+        });
+        
+        
+        
+        // Configurar menú "Salir"
+        menuSalir.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                confirmarSalida();
+            }
+        });
+    }
+    
+    private void abrirVentanaAgregar()
+    {
+        if (listaArtistas.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Primero cargue datos CSV");
+            return;
+        }
+        VentanaAgregar ventanaDeAgregar = new VentanaAgregar(listaArtistas, listaObras);
         ventanaDeAgregar.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenu3ActionPerformed
-
+    }
+    
+    private void abrirVentanaEditar()
+    {
+        if (listaArtistas.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Primero cargue datos CSV");
+            return;
+        }
+        // Asumiendo que tienes una VentanaEditar con el mismo constructor
+        // VentanaEditar ventanaEditar = new VentanaEditar(listaArtistas, listaObras);
+        // ventanaEditar.setVisible(true);
+        // this.dispose();
+        JOptionPane.showMessageDialog(this, "Ventana Editar - Por implementar");
+    }
+    
+    private void abrirVentanaEliminar()
+    {
+        if (listaArtistas.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Primero cargue datos CSV");
+            return;
+        }
+        VentanaEliminar ventanaEliminar = new VentanaEliminar(listaArtistas, listaObras);
+        ventanaEliminar.setVisible(true);
+    }
+    
+    private void cargarDatosCSV()
+    {
+        try
+        {
+            Map<String, Object> datos = LectorCVS.leerDatosDesdeCSV();
+            
+            ArrayList<Artista> artistasCargados = (ArrayList<Artista>) datos.get("artistas");
+            ArrayList<ObraArte> obrasCargadas = (ArrayList<ObraArte>) datos.get("obras");
+            
+            this.listaArtistas.addAll(artistasCargados);
+            this.listaObras.addAll(obrasCargadas);
+            
+            JOptionPane.showMessageDialog(this,"Datos cargados exitosamente!\n" + 
+                "Artistas: " + artistasCargados.size() + "\n" + 
+                "Obras: " + obrasCargadas.size(),"Éxito", JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (IOException e)
+        {
+            JOptionPane.showMessageDialog(this,"Error al cargar el CSV:\n" + e.getMessage(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void confirmarSalida()
+    {
+        int respuesta = JOptionPane.showConfirmDialog(
+            this, 
+            "¿Está seguro que desea salir del programa?", 
+            "Confirmar salida", 
+            JOptionPane.YES_NO_OPTION
+        );
+        
+        if (respuesta == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -159,23 +324,22 @@ public class VentanaMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu10;
-    private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JMenu menuAgregarObra;
+    private javax.swing.JMenu menuCargarDatos;
+    private javax.swing.JMenu menuCrearExposicion;
+    private javax.swing.JMenu menuEditar;
+    private javax.swing.JMenu menuEliminar;
+    private javax.swing.JMenu menuReportes;
+    private javax.swing.JMenu menuSalir;
+    private javax.swing.JMenu menuVentas;
     // End of variables declaration//GEN-END:variables
 }
