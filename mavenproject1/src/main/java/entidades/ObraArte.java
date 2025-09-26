@@ -72,6 +72,9 @@ public void setDisponibilidad(boolean disponibilidad) {
 	this.disponibilidad = disponibilidad;
 }
 
-
+public String getDescripcion()
+{
+    return  Integer.toString(id) + " - " + titulo + " - " + anio;
+}
 
 }
