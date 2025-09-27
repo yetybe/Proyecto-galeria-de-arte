@@ -175,7 +175,7 @@ public class VentanaMain extends javax.swing.JFrame {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt)
         {
-            VentanaCrearExposicion ventanaExpo = new VentanaCrearExposicion(exposiciones);
+            VentanaCrearExposicion ventanaExpo = new VentanaCrearExposicion(exposiciones , inventarioGeneral);
             ventanaExpo.setVisible(true);
         }
     });
