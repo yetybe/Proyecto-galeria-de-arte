@@ -105,6 +105,11 @@ public class VentanaMain extends javax.swing.JFrame {
         jMenuBar1.add(menuReportes);
 
         menuVentas.setText("Ventas");
+        menuVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuVentasActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(menuVentas);
 
         menuEliminar.setText("Eliminar ");
@@ -139,6 +144,12 @@ public class VentanaMain extends javax.swing.JFrame {
     private void menuAgregarObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgregarObraActionPerformed
         
     }//GEN-LAST:event_menuAgregarObraActionPerformed
+
+    private void menuVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVentasActionPerformed
+        // TODO add your handling code here:
+        VentanaVentas ventana = new VentanaVentas(exposiciones, inventarioGeneral, sistemaVentas);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_menuVentasActionPerformed
                                          
 
     private void configurarMenuListeners()
