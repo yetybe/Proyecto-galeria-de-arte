@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 public class VentanaEditarObra extends javax.swing.JFrame {
     private ObraArte obraAEditar;
     private ArrayList<ObraArte> listaObras;
+    
     /**
      * Creates new form VentanaEditarObra
      */
