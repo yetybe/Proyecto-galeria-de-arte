@@ -177,11 +177,11 @@ public class VentanaMain extends javax.swing.JFrame {
         {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                // Aquí puedes agregar la lógica para crear exposición
-                JOptionPane.showMessageDialog(VentanaMain.this, "Función Crear Exposición - Por implementar");
-            }
-        });
+        {
+            VentanaCrearExposicion ventanaExpo = new VentanaCrearExposicion(exposiciones);
+            ventanaExpo.setVisible(true);
+        }
+    });
         
         // Configurar menú "Editar"
         menuEditar.addMouseListener(new java.awt.event.MouseAdapter()
