@@ -69,10 +69,9 @@ public class VentanaVentas extends javax.swing.JFrame {
 
         if (exposicionSeleccionada != null && !exposicionSeleccionada.getObras().isEmpty()) {
             obrasExposicion.addItem("Seleccione una obra...");
-            for (ObraArte obra : exposicionSeleccionada.getObras()) {
-                if(obra.getDisponibilidad()){ // Solo mostramos obras disponibles
-                   obrasExposicion.addItem(obra.getId() + ": " + obra.getTitulo());
-                }
+            for (ObraArte obra : exposicionSeleccionada.getObras()) 
+            {
+                obrasExposicion.addItem(obra.getId() + ": " + obra.getTitulo());
             }
         } else {
             obrasExposicion.addItem("No hay obras en esta exposición");
@@ -90,6 +89,7 @@ public class VentanaVentas extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         obrasExposicion = new javax.swing.JComboBox<>();
         vender = new javax.swing.JButton();
+        salirVentas = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -131,6 +131,13 @@ public class VentanaVentas extends javax.swing.JFrame {
             }
         });
 
+        salirVentas.setText("Salir");
+        salirVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirVentasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,21 +156,27 @@ public class VentanaVentas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(obrasExposicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(355, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(salirVentas)
+                .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(77, 77, 77)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(exposiciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
+                .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(obrasExposicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(85, 85, 85)
+                .addGap(76, 76, 76)
                 .addComponent(vender)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addComponent(salirVentas)
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -221,6 +234,11 @@ public class VentanaVentas extends javax.swing.JFrame {
         cargarObrasDeExposicion(nombreExpo);
     }//GEN-LAST:event_venderActionPerformed
 
+    private void salirVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirVentasActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_salirVentasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -233,6 +251,7 @@ public class VentanaVentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JComboBox<String> obrasExposicion;
+    private javax.swing.JButton salirVentas;
     private javax.swing.JButton vender;
     // End of variables declaration//GEN-END:variables
 }
