@@ -141,13 +141,13 @@ public class VentanaCrearExposicion extends javax.swing.JFrame {
         jScrollPane1.setViewportView(listObrasDisponibles);
 
         try {
-            txtFechaFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            txtFechaFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/ ##/ ####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
         try {
-            txtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            txtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/ ##/ ####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -180,9 +180,9 @@ public class VentanaCrearExposicion extends javax.swing.JFrame {
                                     .addComponent(txtId))
                                 .addGap(147, 147, 147))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtFechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                                    .addComponent(txtFechaFin))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
@@ -274,7 +274,7 @@ public class VentanaCrearExposicion extends javax.swing.JFrame {
                 return;
             }
             
-            if (!fechaInicio.matches("\\d{2}/\\d{2}/\\d{4}") || !fechaFin.matches("\\d{2}/\\d{2}/\\d{4}")) 
+            if (!fechaInicio.matches("\\d{2}/ \\d{2}/ \\d{4}") || !fechaFin.matches("\\d{2}/ \\d{2}/ \\d{4}")) 
             {
                 JOptionPane.showMessageDialog(this, "El formato de fecha debe ser DD/MM/AAAA.", "Formato de Fecha Inválido", JOptionPane.ERROR_MESSAGE);
                 return;
