@@ -11,6 +11,7 @@ package entidades;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 
 public class Inventario {
@@ -56,11 +57,20 @@ public class Inventario {
         return null; // No se encontró
     }
 
-
+    public boolean estaVacio() {
+        return obrasInventario.isEmpty();
+    }
     
     public boolean contieneObra(int idObra) { 
         return obrasInventario.containsKey(idObra);
     }
+    
+    public ArrayList<ObraArte> getObrasComoLista() {
+        
+    return new ArrayList<>(obrasInventario.values());
+}
+    
+    
     
     
 }
