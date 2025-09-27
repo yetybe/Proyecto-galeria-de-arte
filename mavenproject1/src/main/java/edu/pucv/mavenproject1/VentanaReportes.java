@@ -62,7 +62,7 @@ public class VentanaReportes extends javax.swing.JFrame {
                 obra.getTitulo(),
                 obra.getArtista(),
                 obra.getAnio(),
-                "$" + obra.getPrecio(),
+                String.format("$%.2f", obra.getPrecio()),
                 obra.getDisponibilidad() ? "Disponible" : "En exposición/Vendida"
             });
         }
@@ -99,7 +99,7 @@ public class VentanaReportes extends javax.swing.JFrame {
                 obra.getId(),
                 obra.getTitulo(),
                 obra.getArtista(),
-                "$" + obra.getPrecio()
+                String.format("$%.2f", obra.getPrecio())
             });
         }
         
@@ -121,7 +121,7 @@ public class VentanaReportes extends javax.swing.JFrame {
 
             if ("Inventario Completo".equals(opcion)) {
                 for (ObraArte obra : inventarioGeneral.getObrasComoLista()) {
-                    pw.println("ID: " + obra.getId() + " | Título: " + obra.getTitulo() + " | Precio: $" + obra.getPrecio());
+                    pw.println("ID: " + obra.getId() + " | Título: " + obra.getTitulo() + " | Precio: $" + String.format("$%.2f", obra.getPrecio()));
                 }
             } else if ("Exposiciones Actuales".equals(opcion)) {
                 for (Exposicion expo : exposiciones.values()) {
@@ -129,10 +129,10 @@ public class VentanaReportes extends javax.swing.JFrame {
                 }
             } else if ("Reporte de Ventas".equals(opcion)) {
                 for (ObraArte obra : sistemaVentas.getObrasVendidas()) {
-                    pw.println("ID: " + obra.getId() + " | Título: " + obra.getTitulo() + " | Vendida por: $" + obra.getPrecio());
+                    pw.println("ID: " + obra.getId() + " | Título: " + obra.getTitulo() + " | Vendida por: $" + String.format("$%.2f", obra.getPrecio()));
                 }
                 pw.println("-------------------------------------------------");
-                pw.println("GANANCIAS TOTALES: $" + sistemaVentas.getMontoTotalGaleria());
+                pw.println("GANANCIAS TOTALES: $" + String.format("$%.2f", sistemaVentas.getMontoTotalGaleria()));
             }
             
             JOptionPane.showMessageDialog(this, "Reporte '" + opcion + "' guardado en un archivo .txt.", "Reporte Generado", JOptionPane.INFORMATION_MESSAGE);
