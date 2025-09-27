@@ -22,7 +22,6 @@ import entidades.Inventario;
  */
 public class VentanaMain extends javax.swing.JFrame {
     private ArrayList<Artista> listaArtistas;
-    private ArrayList<ObraArte> listaObras;
     private Map<Integer, Exposicion> exposiciones = new HashMap<>();
     private Ventas sistemaVentas;
     private Inventario inventarioGeneral;
@@ -32,7 +31,6 @@ public class VentanaMain extends javax.swing.JFrame {
      */
     public VentanaMain(){
         this.listaArtistas = new ArrayList<>();
-        this.listaObras = new ArrayList<>();
         this.exposiciones = new HashMap<>();
         this.sistemaVentas = new Ventas();
         this.inventarioGeneral = new Inventario();
@@ -205,7 +203,7 @@ public class VentanaMain extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(VentanaMain.this, "Primero cargue datos CSV");
                     return;
                 }
-                VentanaReportes ventanaReportes = new VentanaReportes(listaArtistas, listaObras, exposiciones);
+                VentanaReportes ventanaReportes = new VentanaReportes(listaArtistas, inventarioGeneral.getObrasComoLista(), exposiciones);
                 ventanaReportes.setVisible(true);
             }
         });
@@ -248,7 +246,7 @@ public class VentanaMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Primero cargue datos CSV");
             return;
         }
-        VentanaAgregar ventanaDeAgregar = new VentanaAgregar(listaArtistas, listaObras);
+        VentanaAgregar ventanaDeAgregar = new VentanaAgregar(listaArtistas, inventarioGeneral.getObrasComoLista());
         ventanaDeAgregar.setVisible(true);
     }
     
@@ -258,7 +256,7 @@ public class VentanaMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Primero cargue datos CSV");
             return;
         }
-        VentanaEditarObra ventanaEditarObra = new VentanaEditarObra(listaArtistas, listaObras);
+        VentanaEditarObra ventanaEditarObra = new VentanaEditarObra(listaArtistas, inventarioGeneral.getObrasComoLista());
         ventanaEditarObra.setVisible(true);
     }
     
@@ -268,7 +266,7 @@ public class VentanaMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Primero cargue datos CSV");
             return;
         }
-        VentanaEliminar ventanaEliminar = new VentanaEliminar(listaArtistas, listaObras);
+        VentanaEliminar ventanaEliminar = new VentanaEliminar(listaArtistas, inventarioGeneral.getObrasComoLista());
         ventanaEliminar.setVisible(true);
     }
     
@@ -281,8 +279,13 @@ public class VentanaMain extends javax.swing.JFrame {
             ArrayList<Artista> artistasCargados = (ArrayList<Artista>) datos.get("artistas");
             ArrayList<ObraArte> obrasCargadas = (ArrayList<ObraArte>) datos.get("obras");
             
+            inventarioGeneral.limpiar();
+            
             this.listaArtistas.addAll(artistasCargados);
-            this.listaObras.addAll(obrasCargadas);
+            for (ObraArte obra : obrasCargadas) 
+            {
+                inventarioGeneral.agregarObra(obra);
+            }
             
             JOptionPane.showMessageDialog(this,"Datos cargados exitosamente!\n" + 
                 "Artistas: " + artistasCargados.size() + "\n" + 
