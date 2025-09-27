@@ -64,6 +64,23 @@ public class VentanaAgregar extends javax.swing.JFrame {
 
        private void guardarObra() {
         try {
+            String tipo = (String) comboTipoObra.getSelectedItem();
+            // Validar campos específicos según el tipo
+            if ("Pintura".equals(tipo)) {
+                if (txtEstilo.getText().trim().isEmpty() ||
+                    txtSoporte.getText().trim().isEmpty() ||
+                    txtDimensiones2D.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Complete todos los campos de Pintura.");
+                    return;
+                }
+            } else { // Escultura
+                if (txtMaterial.getText().trim().isEmpty() ||
+                    txtPeso.getText().trim().isEmpty() ||
+                    txtDimensiones3D.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Complete todos los campos de Escultura.");
+                    return;
+                }
+            }
             // Validar básicos
             if (txtId.getText().trim().isEmpty() ||
                 txtAnio.getText().trim().isEmpty() ||
@@ -108,8 +125,6 @@ public class VentanaAgregar extends javax.swing.JFrame {
             Artista artistaObj = listaArtistas.get(idxArtista);
             String nombreArtista = artistaObj.getNombre();
 
-            String tipo = (String) comboTipoObra.getSelectedItem();
-
             ObraArte nuevaObra;
 
             if ("Pintura".equals(tipo)) {
@@ -128,7 +143,7 @@ public class VentanaAgregar extends javax.swing.JFrame {
             }
 
             // Agregar a listas
-            listaObras.add(nuevaObra);
+            inventarioGeneral.agregarObra(nuevaObra);
             artistaObj.agregarObra(nuevaObra);
 
             JOptionPane.showMessageDialog(this, "Obra agregada correctamente.");
