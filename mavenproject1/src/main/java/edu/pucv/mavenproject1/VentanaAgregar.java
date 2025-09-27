@@ -11,6 +11,7 @@ import entidades.Escultura;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import entidades.Inventario;
 
 /**
  *
@@ -20,11 +21,11 @@ import javax.swing.JOptionPane;
 public class VentanaAgregar extends javax.swing.JFrame {
 
     private ArrayList<Artista> listaArtistas;
-    private ArrayList<ObraArte> listaObras;
+    private Inventario inventarioGeneral ;
 
-    public VentanaAgregar(ArrayList<Artista> listaArtistas, ArrayList<ObraArte> listaObras) {
+    public VentanaAgregar(ArrayList<Artista> listaArtistas, Inventario i) {
         this.listaArtistas = listaArtistas;
-        this.listaObras = listaObras;
+        inventarioGeneral = i;
         initComponents();
         inicializar();
     }
