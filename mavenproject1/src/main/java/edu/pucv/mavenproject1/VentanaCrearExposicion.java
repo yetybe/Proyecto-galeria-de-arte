@@ -82,13 +82,13 @@ public class VentanaCrearExposicion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        txtFechaInicio = new javax.swing.JTextField();
-        txtFechaFin = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listObrasDisponibles = new javax.swing.JList<>();
+        txtFechaFin = new javax.swing.JFormattedTextField();
+        txtFechaInicio = new javax.swing.JFormattedTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -125,12 +125,6 @@ public class VentanaCrearExposicion extends javax.swing.JFrame {
 
         jLabel4.setText("Fecha término:");
 
-        txtFechaFin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaFinActionPerformed(evt);
-            }
-        });
-
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,6 +142,23 @@ public class VentanaCrearExposicion extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(listObrasDisponibles);
+
+        try {
+            txtFechaFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txtFechaInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtFechaInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaInicioActionPerformed(evt);
+            }
+        });
 
         jMenuBar1.add(jMenu1);
         jMenuBar1.add(jMenu2);
@@ -171,11 +182,16 @@ public class VentanaCrearExposicion extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFechaInicio)
-                            .addComponent(txtNombre)
-                            .addComponent(txtId)
-                            .addComponent(txtFechaFin))
-                        .addGap(147, 147, 147))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombre)
+                                    .addComponent(txtId))
+                                .addGap(147, 147, 147))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jLabel5)
@@ -204,7 +220,7 @@ public class VentanaCrearExposicion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -214,12 +230,12 @@ public class VentanaCrearExposicion extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel3)
+                            .addComponent(txtFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
@@ -249,6 +265,14 @@ public class VentanaCrearExposicion extends javax.swing.JFrame {
             if (idStr.isEmpty() || nombre.isEmpty() || fechaInicio.isEmpty() || fechaFin.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Todos los campos de la exposición son obligatorios.", "Campos Vacíos", JOptionPane.ERROR_MESSAGE);
                 return;
+                
+            }
+            
+                   
+            if (nombre.matches("\\d+")) 
+            {
+                JOptionPane.showMessageDialog(this, "El nombre de la exposición no puede ser solo un número.", "Nombre Inválido", JOptionPane.ERROR_MESSAGE);
+                return;
             }
             
             int id = Integer.parseInt(idStr);
@@ -257,9 +281,15 @@ public class VentanaCrearExposicion extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Ya existe una exposición con ese ID.", "ID Duplicado", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            
+            if (!fechaInicio.matches("\\d{2}/\\d{2}/\\d{4}") || !fechaFin.matches("\\d{2}/\\d{2}/\\d{4}")) 
+            {
+                JOptionPane.showMessageDialog(this, "El formato de fecha debe ser DD/MM/AAAA.", "Formato de Fecha Inválido", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
           
-            Exposicion nuevaExpo = new Exposicion(id, nombre, fechaInicio, fechaFin); // Asumiendo que el constructor está actualizado
+            Exposicion nuevaExpo = new Exposicion(id, nombre, fechaInicio, fechaFin); 
 
             
             List<String> obrasSeleccionadas = listObrasDisponibles.getSelectedValuesList();
@@ -287,10 +317,6 @@ public class VentanaCrearExposicion extends javax.swing.JFrame {
     
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
-    private void txtFechaFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaFinActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaFinActionPerformed
-
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdActionPerformed
@@ -299,6 +325,10 @@ public class VentanaCrearExposicion extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose(); 
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaInicioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,8 +354,8 @@ public class VentanaCrearExposicion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JList<String> listObrasDisponibles;
-    private javax.swing.JTextField txtFechaFin;
-    private javax.swing.JTextField txtFechaInicio;
+    private javax.swing.JFormattedTextField txtFechaFin;
+    private javax.swing.JFormattedTextField txtFechaInicio;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
