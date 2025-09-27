@@ -1,13 +1,21 @@
-id_artista,nombre_artista,nacionalidad,id_obra,titulo_obra,anio,precio
-1,Leonardo da Vinci,Italiana,101,La Gioconda,1503,12500000
-1,Leonardo da Vinci,Italiana,102,La Última Cena,1498,9800000
-2,Vincent van Gogh,Holandesa,103,La Noche Estrellada,1889,8500000
-2,Vincent van Gogh,Holandesa,104,Los Girasoles,1888,7200000
-3,Pablo Picasso,Española,105,Guernica,1937,9500000
-3,Pablo Picasso,Española,106,Las Señoritas de Avignon,1907,6800000
-4,Frida Kahlo,Mexicana,107,Las Dos Fridas,1939,4200000
-4,Frida Kahlo,Mexicana,108,Autorretrato con Collar de Espinas,1940,3800000
-5,Claudio Bravo,Chilena,109,El Pintor y su Modelo,1980,2500000
-5,Claudio Bravo,Chilena,110,Naturaleza Muerta con Melones,1995,1800000
-6,Roberto Matta,Chilena,111,Écouter Vivre,1973,3200000
-6,Roberto Matta,Chilena,112,Le Long Pont,1959,2800000
+id_artista,nombre_artista,nacionalidad,id_obra,titulo_obra,anio,precio,tipo_obra,caracteristica1,caracteristica2,caracteristica3
+1,Leonardo da Vinci,Italiana,101,La Gioconda,1503,12500000,Pintura,Renacimiento,Óleo sobre madera,77x53 cm
+1,Leonardo da Vinci,Italiana,102,La Última Cena,1498,9800000,Pintura,Renacimiento,Temple y óleo sobre yeso,460x880 cm
+2,Vincent van Gogh,Holandesa,103,La Noche Estrellada,1889,8500000,Pintura,Postimpresionismo,Óleo sobre lienzo,74x92 cm
+2,Vincent van Gogh,Holandesa,104,Los Girasoles,1888,7200000,Pintura,Postimpresionismo,Óleo sobre lienzo,92x73 cm
+3,Pablo Picasso,Española,105,Guernica,1937,9500000,Pintura,Cubismo,Óleo sobre lienzo,349x776 cm
+3,Pablo Picasso,Española,106,Las Señoritas de Avignon,1907,6800000,Pintura,Cubismo,Óleo sobre lienzo,244x234 cm
+4,Frida Kahlo,Mexicana,107,Las Dos Fridas,1939,4200000,Pintura,Surrealismo,Óleo sobre lienzo,173x173 cm
+4,Frida Kahlo,Mexicana,108,Autorretrato con Collar de Espinas,1940,3800000,Pintura,Surrealismo,Óleo sobre lienzo,47x61 cm
+5,Claudio Bravo,Chilena,109,El Pintor y su Modelo,1980,2500000,Pintura,Hiperrealismo,Óleo sobre lienzo,120x150 cm
+5,Claudio Bravo,Chilena,110,Naturaleza Muerta con Melones,1995,1800000,Pintura,Hiperrealismo,Óleo sobre lienzo,80x100 cm
+6,Roberto Matta,Chilena,111,Écouter Vivre,1973,3200000,Pintura,Surrealismo,Óleo sobre lienzo,200x300 cm
+6,Roberto Matta,Chilena,112,Le Long Pont,1959,2800000,Pintura,Surrealismo,Acrílico sobre lienzo,150x200 cm
+7,Auguste Rodin,Francesa,113,El Pensador,1904,15000000,Escultura,Bronce,700 kg,72x40x59 cm
+7,Auguste Rodin,Francesa,114,El Beso,1889,12000000,Escultura,Mármol,500 kg,182x112x102 cm
+8,Michelangelo,Italiana,115,David,1504,20000000,Escultura,Mármol,5600 kg,517x199 cm
+8,Michelangelo,Italiana,116,Piedad,1499,18000000,Escultura,Mármol,1800 kg,174x195 cm
+9,Lygia Clark,Brasileña,117,Bicho,1960,3500000,Escultura,Metal articulado,15 kg,30x30x30 cm
+9,Lygia Clark,Brasileña,118,Cascas,1966,2800000,Escultura,Aluminio,8 kg,25x25x25 cm
+10,Constantin Brancusi,Rumana,119,El Beso,1908,8500000,Escultura,Piedra caliza,300 kg,58x36x36 cm
+10,Constantin Brancusi,Rumana,120,Pájaro en el Espacio,1923,9500000,Escultura,Bronce pulido,50 kg,134x16x16 cm
