@@ -342,7 +342,8 @@ public class VentanaEditarObra extends javax.swing.JFrame {
                 return;
             }
             
-            if (txtAnio.getText().trim().isEmpty()) {
+            if (txtAnio.getText().trim().isEmpty())
+            {
                 JOptionPane.showMessageDialog(this, "El Año es obligatorio");
                 return;
             }
