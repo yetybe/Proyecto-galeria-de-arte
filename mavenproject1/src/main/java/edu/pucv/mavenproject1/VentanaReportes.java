@@ -10,101 +10,139 @@ package edu.pucv.mavenproject1;
  */
 import entidades.Artista;
 import entidades.Exposicion;
-import entidades.ObraArte;
-import java.util.*;
-import javax.swing.table.DefaultTableModel;
-import java.io.PrintWriter;
-import java.io.IOException;
 import entidades.Inventario;
+import entidades.ObraArte;
+import entidades.Ventas;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class VentanaReportes extends javax.swing.JFrame {
-    private ArrayList<Artista> listaArtistas;
     private Inventario inventarioGeneral;
     private Map<Integer, Exposicion> exposiciones;
+    private Ventas sistemaVentas;
 
-    public VentanaReportes(ArrayList<Artista> listaArtistas, Inventario i, Map<Integer, Exposicion> exposiciones) {
-        this.listaArtistas = listaArtistas;
+    public VentanaReportes(Inventario i, Map<Integer, Exposicion> exposiciones , Ventas v) {
         inventarioGeneral = i;
         this.exposiciones = exposiciones;
-
+        sistemaVentas = v;
+       
         initComponents();
-        configurarComboBox();
+        configuracionInicial();
     }
     
-     private void configurarComboBox() {
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(
-            new String[] { "Resumen General", "Obras por Artista" }
-        ));
+    private void configuracionInicial() 
+    {
+        this.setTitle("Generador de Reportes");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("Seleccione un reporte...");
+        jComboBox1.addItem("Inventario Completo");
+        jComboBox1.addItem("Exposiciones Actuales");
+        jComboBox1.addItem("Reporte de Ventas");
     }
      
-    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {
-        String opcion = (String) jComboBox1.getSelectedItem();
-
-        if ("Resumen General".equals(opcion)) {
-            mostrarResumenGeneral();
-        } else if ("Obras por Artista".equals(opcion)) {
-            mostrarObrasPorArtista();
-        }
-        
-        generarReporteTxt();
-    }
-
-    private void mostrarResumenGeneral() {
+    private void mostrarReporteInventario() 
+    {
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Total Artistas");
-        model.addColumn("Total Obras");
-        model.addColumn("Total Exposiciones");
-
-        model.addRow(new Object[]{
-            listaArtistas.size(),
-            listaObras.size(),
-            exposiciones.size()
-        });
-
-        jTable2.setModel(model);
-    }
-    
-    private void mostrarObrasPorArtista() {
-        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Título");
         model.addColumn("Artista");
-        model.addColumn("Obra");
+        model.addColumn("Año");
+        model.addColumn("Precio");
+        model.addColumn("Disponibilidad");
 
-        for (ObraArte obra : listaObras) {
+        for (ObraArte obra : inventarioGeneral.getObrasComoLista()) {
             model.addRow(new Object[]{
+                obra.getId(),
+                obra.getTitulo(),
                 obra.getArtista(),
-                obra.getTitulo()
+                obra.getAnio(),
+                "$" + obra.getPrecio(),
+                obra.getDisponibilidad() ? "Disponible" : "En exposición/Vendida"
             });
         }
-
         jTable2.setModel(model);
     }
     
-    private void generarReporteTxt() {
+    private void mostrarReporteExposiciones() 
+    {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Exposición");
+        model.addColumn("Nombre");
+        model.addColumn("Cantidad de Obras");
+
+        for (Exposicion expo : exposiciones.values()) {
+            model.addRow(new Object[]{
+                expo.getId(),
+                expo.getNombre(),
+                expo.getCantidadObras()
+            });
+        }
+        jTable2.setModel(model);
+    }
+    
+    private void mostrarReporteVentas() 
+    {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Obra");
+        model.addColumn("Título");
+        model.addColumn("Artista");
+        model.addColumn("Precio de Venta");
+
+        for (ObraArte obra : sistemaVentas.getObrasVendidas()) {
+            model.addRow(new Object[]{
+                obra.getId(),
+                obra.getTitulo(),
+                obra.getArtista(),
+                "$" + obra.getPrecio()
+            });
+        }
+        
+        // Fila final con el total de ganancias
+        model.addRow(new Object[]{"", "", "--- TOTAL GANANCIAS ---", "$" + sistemaVentas.getMontoTotalGaleria()});
+        
+        jTable2.setModel(model);
+    }
+    
+    private void generarReporteTxt() 
+    {
         String opcion = (String) jComboBox1.getSelectedItem();
-        try (PrintWriter pw = new PrintWriter("reporte.txt")) {
-            if ("Resumen General".equals(opcion)) {
-                pw.println("Total Artistas: " + listaArtistas.size());
-                pw.println("Total Obras: " + listaObras.size());
-                pw.println("Total Exposiciones: " + exposiciones.size());
-            } else if ("Obras por Artista".equals(opcion)) {
-                pw.println("Artista, Obra");
-                for (ObraArte obra : listaObras) {
-                    pw.println(obra.getArtista() + ", " + obra.getTitulo());
+        if (opcion == null || opcion.equals("Seleccione un reporte...")) return; // No hacer nada si no hay selección
+
+        try (PrintWriter pw = new PrintWriter("reporte_" + opcion.replace(" ", "_") + ".txt")) {
+            pw.println("--- REPORTE DE LA GALERÍA: " + opcion + " ---");
+            pw.println("Fecha: " + new java.util.Date());
+            pw.println("-------------------------------------------------");
+
+            if ("Inventario Completo".equals(opcion)) {
+                for (ObraArte obra : inventarioGeneral.getObrasComoLista()) {
+                    pw.println("ID: " + obra.getId() + " | Título: " + obra.getTitulo() + " | Precio: $" + obra.getPrecio());
                 }
+            } else if ("Exposiciones Actuales".equals(opcion)) {
+                for (Exposicion expo : exposiciones.values()) {
+                    pw.println("ID: " + expo.getId() + " | Nombre: " + expo.getNombre() + " | Obras: " + expo.getCantidadObras());
+                }
+            } else if ("Reporte de Ventas".equals(opcion)) {
+                for (ObraArte obra : sistemaVentas.getObrasVendidas()) {
+                    pw.println("ID: " + obra.getId() + " | Título: " + obra.getTitulo() + " | Vendida por: $" + obra.getPrecio());
+                }
+                pw.println("-------------------------------------------------");
+                pw.println("GANANCIAS TOTALES: $" + sistemaVentas.getMontoTotalGaleria());
             }
-            System.out.println("Reporte generado correctamente!");
+            
+            JOptionPane.showMessageDialog(this, "Reporte '" + opcion + "' guardado en un archivo .txt.", "Reporte Generado", JOptionPane.INFORMATION_MESSAGE);
+            
         } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al escribir el archivo de reporte.", "Error de Archivo", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
-                                  
-    /**
-     * Creates new form VentanaReportes
-     */
-    public VentanaReportes() {
-        initComponents();
-    }
-
+                            
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -215,8 +253,28 @@ public class VentanaReportes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void generarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarReporteActionPerformed
-        // TODO add your handling code here:
-        btnGenerarActionPerformed(evt);
+
+        String opcion = (String) jComboBox1.getSelectedItem();
+
+        if (opcion == null || opcion.equals("Seleccione un reporte...")) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un tipo de reporte.", "Selección Inválida", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Usamos un switch para llamar al método correspondiente
+        switch (opcion) {
+            case "Inventario Completo":
+                mostrarReporteInventario();
+                break;
+            case "Exposiciones Actuales":
+                mostrarReporteExposiciones();
+                break;
+            case "Reporte de Ventas":
+                mostrarReporteVentas();
+                break;
+        }
+       
+        generarReporteTxt();
     }//GEN-LAST:event_generarReporteActionPerformed
 
     private void botonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarActionPerformed
@@ -224,40 +282,6 @@ public class VentanaReportes extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonCerrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaReportes().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCerrar;
