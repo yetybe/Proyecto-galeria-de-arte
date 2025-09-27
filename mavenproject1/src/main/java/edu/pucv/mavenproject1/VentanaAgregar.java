@@ -4,11 +4,140 @@
  */
 package edu.pucv.mavenproject1;
 
+import entidades.Artista;
+import entidades.ObraArte;
+import entidades.Pintura;
+import entidades.Escultura;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author dmena
  */
+
 public class VentanaAgregar extends javax.swing.JFrame {
+
+    private ArrayList<Artista> listaArtistas;
+    private ArrayList<ObraArte> listaObras;
+
+    public VentanaAgregar(ArrayList<Artista> listaArtistas, ArrayList<ObraArte> listaObras) {
+        this.listaArtistas = listaArtistas;
+        this.listaObras = listaObras;
+        initComponents();
+        inicializar();
+    }
+    
+    private void inicializar() {
+        // Poblar comboTipoObra
+        comboTipoObra.setModel(new DefaultComboBoxModel<>(new String[]{"Pintura", "Escultura"}));
+
+        // Poblar comboArtista con nombres
+        DefaultComboBoxModel<String> artistaModel = new DefaultComboBoxModel<>();
+        for (Artista a : listaArtistas) {
+            artistaModel.addElement(a.getNombre());
+        }
+        comboArtista.setModel(artistaModel);
+
+        // Mostrar/ocultar paneles según selección
+        comboTipoObra.addActionListener(e -> {
+            String tipo = (String) comboTipoObra.getSelectedItem();
+            if ("Pintura".equals(tipo)) {
+                panelPintura.setVisible(true);
+                panelEscultura.setVisible(false);
+            } else {
+                panelPintura.setVisible(false);
+                panelEscultura.setVisible(true);
+            }
+            this.pack();
+        });
+
+        comboTipoObra.setSelectedIndex(0);
+        panelPintura.setVisible(true);
+        panelEscultura.setVisible(false);
+
+        btnCancelar.addActionListener(e -> this.dispose());
+        btnGuardar.addActionListener(e -> guardarObra());
+    }
+
+       private void guardarObra() {
+        try {
+            // Validar básicos
+            if (txtId.getText().trim().isEmpty() ||
+                txtAnio.getText().trim().isEmpty() ||
+                txtTitulo.getText().trim().isEmpty() ||
+                txtPrecio.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Complete los campos obligatorios.");
+                return;
+            }
+
+            int id;
+            try {
+                id = Integer.parseInt(txtId.getText().trim());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "ID debe ser entero.");
+                return;
+            }
+
+            int anio;
+            try {
+                anio = Integer.parseInt(txtAnio.getText().trim());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Año debe ser entero.");
+                return;
+            }
+
+            String titulo = txtTitulo.getText().trim();
+
+            float precio;
+            try {
+                precio = Float.parseFloat(txtPrecio.getText().trim());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Precio debe ser numérico.");
+                return;
+            }
+
+            // Obtener artista
+            int idxArtista = comboArtista.getSelectedIndex();
+            if (idxArtista < 0) {
+                JOptionPane.showMessageDialog(this, "Seleccione un artista.");
+                return;
+            }
+            Artista artistaObj = listaArtistas.get(idxArtista);
+            String nombreArtista = artistaObj.getNombre();
+
+            String tipo = (String) comboTipoObra.getSelectedItem();
+
+            ObraArte nuevaObra;
+
+            if ("Pintura".equals(tipo)) {
+                String estilo = txtEstilo.getText().trim();
+                String soporte = txtSoporte.getText().trim();
+                String dimensiones2D = txtDimensiones2D.getText().trim();
+
+                nuevaObra = new Pintura(id, titulo, nombreArtista, anio, precio, estilo, soporte, dimensiones2D);
+
+            } else { // Escultura
+                String material = txtMaterial.getText().trim();
+                String peso = txtPeso.getText().trim();
+                String dimensiones3D = txtDimensiones3D.getText().trim();
+
+                nuevaObra = new Escultura(id, titulo, nombreArtista, anio, precio, material, peso, dimensiones3D);
+            }
+
+            // Agregar a listas
+            listaObras.add(nuevaObra);
+            artistaObj.agregarObra(nuevaObra);
+
+            JOptionPane.showMessageDialog(this, "Obra agregada correctamente.");
+            this.dispose();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+    }
 
     /**
      * Creates new form VentanaAgregar
