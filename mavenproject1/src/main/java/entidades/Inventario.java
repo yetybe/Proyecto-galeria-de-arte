@@ -71,6 +71,15 @@ public class Inventario {
     return new ArrayList<>(obrasInventario.values());
     }
     
+    public boolean existeId(int id) {
+    for (ObraArte o : obrasInventario.values()) {
+        if (o.getId() == id) {
+            return true;
+        }
+    }
+    return false;
+}
+    
     public void limpiar() 
     {
         obrasInventario.clear();
