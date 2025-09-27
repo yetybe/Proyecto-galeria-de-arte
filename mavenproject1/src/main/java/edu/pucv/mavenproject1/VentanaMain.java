@@ -145,8 +145,7 @@ public class VentanaMain extends javax.swing.JFrame {
 
     private void menuVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVentasActionPerformed
         // TODO add your handling code here:
-        VentanaVentas ventana = new VentanaVentas(exposiciones, inventarioGeneral, sistemaVentas);
-        ventana.setVisible(true);
+        
     }//GEN-LAST:event_menuVentasActionPerformed
                                          
 
@@ -197,14 +196,7 @@ public class VentanaMain extends javax.swing.JFrame {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                // Aquí puedes agregar la lógica para reportes
-                //JOptionPane.showMessageDialog(VentanaMain.this, "Función Reportes - Por implementar");
-                if (listaArtistas.isEmpty()) {
-                    JOptionPane.showMessageDialog(VentanaMain.this, "Primero cargue datos CSV");
-                    return;
-                }
-                VentanaReportes ventanaReportes = new VentanaReportes(listaArtistas, inventarioGeneral.getObrasComoLista(), exposiciones);
-                ventanaReportes.setVisible(true);
+                abrirVentanaReportes();
             }
         });
         
@@ -222,8 +214,7 @@ public class VentanaMain extends javax.swing.JFrame {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                // Aquí puedes agregar la lógica para ventas
-                JOptionPane.showMessageDialog(VentanaMain.this, "Función Ventas - Por implementar");
+                abrirVentanaVentas();
             }
         });
         
@@ -287,8 +278,27 @@ public class VentanaMain extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID numérico válido.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
     }
-}
+    }
     
+    private void abrirVentanaVentas()
+    {
+        if (listaArtistas.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Primero cargue datos CSV");
+            return;
+        }
+        
+        VentanaVentas ventana = new VentanaVentas(exposiciones, inventarioGeneral, sistemaVentas);
+        ventana.setVisible(true);
+    }
+
+    private void abrirVentanaReportes(){
+        if (listaArtistas.isEmpty()) {
+                    JOptionPane.showMessageDialog(VentanaMain.this, "Primero cargue datos CSV");
+                    return;
+                }
+                VentanaReportes ventanaReportes = new VentanaReportes(listaArtistas, inventarioGeneral.getObrasComoLista(), exposiciones);
+                ventanaReportes.setVisible(true);
+    }
     private void abrirVentanaEliminar()
     {
         if (listaArtistas.isEmpty()) {
