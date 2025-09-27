@@ -243,7 +243,6 @@ public class VentanaMain extends javax.swing.JFrame {
         }
         VentanaEditar ventanaEditar = new VentanaEditar(listaArtistas, listaObras);
         ventanaEditar.setVisible(true);
-        JOptionPane.showMessageDialog(this, "Ventana Editar - Por implementar");
     }
     
     private void abrirVentanaEliminar()
