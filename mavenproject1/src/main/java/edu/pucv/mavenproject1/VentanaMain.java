@@ -250,15 +250,44 @@ public class VentanaMain extends javax.swing.JFrame {
         ventanaDeAgregar.setVisible(true);
     }
     
-    private void abrirVentanaEditar()
-    {
-        if (listaArtistas.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Primero cargue datos CSV");
+// Dentro de tu clase VentanaMain.java
+
+    private void abrirVentanaEditar() {
+        if (inventarioGeneral.estaVacio()) { 
+        JOptionPane.showMessageDialog(this, "Primero debe cargar datos desde el CSV.", "Inventario Vacío", JOptionPane.WARNING_MESSAGE);
+        return;
+        }
+
+        String idStr = JOptionPane.showInputDialog(this, "Ingrese el ID de la obra que desea editar:", "Editar Obra", JOptionPane.QUESTION_MESSAGE);
+
+    // Si el usuario presiona "Cancelar" o no escribe nada, salimos del método.
+        if (idStr == null || idStr.trim().isEmpty()) {
             return;
         }
-        VentanaEditarObra ventanaEditarObra = new VentanaEditarObra(listaArtistas, inventarioGeneral.getObrasComoLista());
-        ventanaEditarObra.setVisible(true);
+
+        try {
+        
+            int idObra = Integer.parseInt(idStr);
+        
+        
+            ObraArte obraParaEditar = inventarioGeneral.buscarObra(idObra);
+
+        
+            if (obraParaEditar != null) 
+            {
+                VentanaEditarObra ventanaEditar = new VentanaEditarObra(obraParaEditar, inventarioGeneral.getObrasComoLista());
+                ventanaEditar.setVisible(true);
+            } 
+            else {
+
+            JOptionPane.showMessageDialog(this, "No se encontró ninguna obra con el ID: " + idObra, "Error de Búsqueda", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    } catch (NumberFormatException e) {
+
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID numérico válido.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
     }
+}
     
     private void abrirVentanaEliminar()
     {
