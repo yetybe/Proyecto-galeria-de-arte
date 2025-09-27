@@ -50,7 +50,12 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtAnio" alignment="1" max="32767" attributes="0"/>
                                   <Component id="txtId" max="32767" attributes="0"/>
-                                  <Component id="comboArtista" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="comboArtista" min="-2" pref="140" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="btnAgregarArtista" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -66,6 +71,10 @@
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="txtTitulo" min="-2" pref="118" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnRecargar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -105,6 +114,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="comboArtista" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAgregarArtista" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnRecargar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -353,5 +364,15 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnAgregarArtista">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Agregar Artista"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnRecargar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Recargar"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

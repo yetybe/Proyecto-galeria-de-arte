@@ -33,14 +33,24 @@ public class VentanaAgregar extends javax.swing.JFrame {
     private void inicializar() {
         // Poblar comboTipoObra
         comboTipoObra.setModel(new DefaultComboBoxModel<>(new String[]{"Pintura", "Escultura"}));
-
-        // Poblar comboArtista con nombres
-        DefaultComboBoxModel<String> artistaModel = new DefaultComboBoxModel<>();
-        for (Artista a : listaArtistas) {
-            artistaModel.addElement(a.getNombre());
-        }
-        comboArtista.setModel(artistaModel);
-
+        
+        llenarCombo();
+        // Poblar comboArtista con nombre
+        
+        btnAgregarArtista.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirVentanaAgregarArtista();
+            }
+        });
+        
+        btnRecargar.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Recargar();
+            }
+        });
+        
         // Mostrar/ocultar paneles según selección
         comboTipoObra.addActionListener(e -> {
             String tipo = (String) comboTipoObra.getSelectedItem();
@@ -61,7 +71,21 @@ public class VentanaAgregar extends javax.swing.JFrame {
         btnCancelar.addActionListener(e -> this.dispose());
         btnGuardar.addActionListener(e -> guardarObra());
     }
-
+    
+    private void llenarCombo()
+    {
+        DefaultComboBoxModel<String> artistaModel = new DefaultComboBoxModel<>();
+        for (Artista a : listaArtistas) {
+            artistaModel.addElement(a.getNombre());
+        }
+        comboArtista.setModel(artistaModel);
+    }
+    
+    private void Recargar()
+    {
+        llenarCombo();
+    }
+    
        private void guardarObra() {
         try {
             String tipo = (String) comboTipoObra.getSelectedItem();
@@ -178,7 +202,11 @@ public class VentanaAgregar extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-
+    private void abrirVentanaAgregarArtista()
+    {
+        VentanaAgregarArtista ventanaArtista = new VentanaAgregarArtista(listaArtistas);
+        ventanaArtista.setVisible(true); 
+    }
     /**
      * Creates new form VentanaAgregar
      */
@@ -223,6 +251,8 @@ public class VentanaAgregar extends javax.swing.JFrame {
         txtEstilo = new javax.swing.JTextField();
         txtSoporte = new javax.swing.JTextField();
         txtDimensiones2D = new javax.swing.JTextField();
+        btnAgregarArtista = new javax.swing.JButton();
+        btnRecargar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -234,11 +264,22 @@ public class VentanaAgregar extends javax.swing.JFrame {
 
         jLabel4.setText("Artista :");
 
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
+            }
+        });
+
         jLabel5.setText("Titulo :");
 
         jLabel6.setText("Precio :");
 
         comboTipoObra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboTipoObra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTipoObraActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
 
@@ -334,6 +375,10 @@ public class VentanaAgregar extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
+        btnAgregarArtista.setText("Agregar Artista");
+
+        btnRecargar.setText("Recargar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -362,7 +407,11 @@ public class VentanaAgregar extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtAnio, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtId)
-                                    .addComponent(comboArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(comboArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnAgregarArtista)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
@@ -373,7 +422,10 @@ public class VentanaAgregar extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRecargar))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panelPintura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(37, 37, 37)
@@ -402,7 +454,9 @@ public class VentanaAgregar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboArtista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(btnAgregarArtista)
+                    .addComponent(btnRecargar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelPintura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -453,8 +507,10 @@ public class VentanaAgregar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregarArtista;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnRecargar;
     private javax.swing.JComboBox<String> comboArtista;
     private javax.swing.JComboBox<String> comboTipoObra;
     private javax.swing.JLabel jLabel1;
