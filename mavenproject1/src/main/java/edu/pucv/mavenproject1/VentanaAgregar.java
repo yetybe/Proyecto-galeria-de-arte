@@ -470,7 +470,16 @@ public class VentanaAgregar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {                                      
+    // Puedes dejar esto vacío o agregar lógica si necesitas
+}                                     
 
+    private void comboTipoObraActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    // Puedes dejar esto vacío, porque ya manejas el cambio de panels en inicializar()
+    // O si quieres, puedes llamar a tu lógica existente:
+    }
+    
     /**
      * @param args the command line arguments
      */
