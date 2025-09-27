@@ -65,10 +65,17 @@ public class Inventario {
         return obrasInventario.containsKey(idObra);
     }
     
-    public ArrayList<ObraArte> getObrasComoLista() {
+    public ArrayList<ObraArte> getObrasComoLista() 
+    {
         
     return new ArrayList<>(obrasInventario.values());
-}
+    }
+    
+    public void limpiar() 
+    {
+        obrasInventario.clear();
+    }
+    
     
     
     
