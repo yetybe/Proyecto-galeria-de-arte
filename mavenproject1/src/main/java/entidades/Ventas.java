@@ -18,39 +18,25 @@ public class Ventas {
     }
 
 
-    public void venderObra(int idObra, Exposicion exposicion) {
+    public void venderObra(int idObra, Exposicion exposicion) 
+    {
         ObraArte obraParaVender = null;
-
-        // 1. Buscar la obra dentro de la lista de obras de la exposición.
         for (ObraArte obra : exposicion.getObras()) {
             if (obra.getId() == idObra) {
                 obraParaVender = obra;
-                break; // Salimos del bucle una vez que la encontramos.
+                break;
             }
         }
 
-        if (obraParaVender != null && obraParaVender.getDisponibilidad()) {
+        if (obraParaVender != null) {
             
-
             this.montoTotalGaleria += obraParaVender.getPrecio();
-            
-            // Cambiamos el estado de la obra a "no disponible".
-            obraParaVender.setDisponibilidad(false);
-            
-            // Añadimos la obra a nuestro registro de ventas.
             this.obrasVendidas.add(obraParaVender);
             
-            // (Opcional) La eliminamos de la exposición porque ya fue vendida.
-            exposicion.eliminarObra(idObra);
+            obraParaVender.setDisponibilidad(false);
             
-            System.out.println("\n¡Venta exitosa!");
-            System.out.println("Se vendió la obra: '" + obraParaVender.getTitulo() + "' por $" + obraParaVender.getPrecio());
-            System.out.println("Monto total de la galería ahora es: $" + this.montoTotalGaleria);
-            
-        } else if (obraParaVender != null && !obraParaVender.getDisponibilidad()) {
-            System.out.println("\nError: La obra '" + obraParaVender.getTitulo() + "' ya ha sido vendida y no está disponible.");
-        } else {
-            System.out.println("\nError: No se encontró una obra con el ID " + idObra + " en la exposición seleccionada.");
+           
+            exposicion.eliminarObra(idObra); 
         }
     }
 
