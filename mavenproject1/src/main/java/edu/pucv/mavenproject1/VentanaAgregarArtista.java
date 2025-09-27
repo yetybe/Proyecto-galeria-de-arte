@@ -113,45 +113,58 @@ public class VentanaAgregarArtista extends javax.swing.JFrame {
         });
     }
     
-    private void guardarArtista()
-    {
-        String id = txtId.getText().trim();
-        if (id.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "El ID es obligatorio");
-            txtId.requestFocus();
-            return;
-        }
-        
-        int idEntero = Integer.parseInt(id);
+    private void guardarArtista() {
+        // 1. Obtener y limpiar los datos de los campos de texto
+        String idStr = txtId.getText().trim();
         String nombre = txtNombre.getText().trim();
         String nacionalidad = txtNacionalidad.getText().trim();
-        
-        if (nombre.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "El nombre del artista es obligatorio");
-            txtNombre.requestFocus();
+    
+ 
+
+    
+        if (idStr.isEmpty() || nombre.isEmpty() || nacionalidad.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        if (nacionalidad.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "La Nacionalidad es oblogatoria");
-            txtNacionalidad.requestFocus();
+
+   
+        int idEntero;
+        try {
+            idEntero = Integer.parseInt(idStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID debe ser un valor numérico.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        // Verificar si el artista ya existe
+
+    
+        if (nombre.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "El nombre del artista no puede consistir únicamente en números.", "Nombre Inválido", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    
+        if (nacionalidad.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "La nacionalidad no puede consistir únicamente en números.", "Nacionalidad Inválida", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    
+    
         for (Artista artista : listaArtistas) {
+            if (artista.getId() == idEntero) {
+                JOptionPane.showMessageDialog(this, "Ya existe un artista con el ID " + idEntero, "ID Duplicado", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             if (artista.getNombre().equalsIgnoreCase(nombre)) {
-                JOptionPane.showMessageDialog(this, "El artista '" + nombre + "' ya existe");
+                JOptionPane.showMessageDialog(this, "El artista '" + nombre + "' ya existe en la lista.", "Artista Duplicado", JOptionPane.ERROR_MESSAGE);
                 return;
             }
         }
 
-        // Crear nuevo artista
-        Artista nuevoArtista = new Artista(idEntero,nombre,nacionalidad);
-        listaArtistas.add(nuevoArtista);
-        
-        JOptionPane.showMessageDialog(this, "Artista '" + nombre + "' agregado exitosamente!");
-        dispose();
-    }
+    Artista nuevoArtista = new Artista(idEntero, nombre, nacionalidad);
+    listaArtistas.add(nuevoArtista);
+    
+    JOptionPane.showMessageDialog(this, "Artista '" + nombre + "' agregado exitosamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    this.dispose(); 
+}
     
     /**
      * @param args the command line arguments
