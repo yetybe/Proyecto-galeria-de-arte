@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import entidades.Ventas;
+import entidades.Inventario;
 
 /**
  *
@@ -22,6 +24,8 @@ public class VentanaMain extends javax.swing.JFrame {
     private ArrayList<Artista> listaArtistas;
     private ArrayList<ObraArte> listaObras;
     private Map<Integer, Exposicion> exposiciones = new HashMap<>();
+    private Ventas sistemaVentas;
+    private Inventario inventarioGeneral;
 
     /**
      * Creates new form VentanaMain
@@ -30,6 +34,8 @@ public class VentanaMain extends javax.swing.JFrame {
         this.listaArtistas = new ArrayList<>();
         this.listaObras = new ArrayList<>();
         this.exposiciones = new HashMap<>();
+        this.sistemaVentas = new Ventas();
+        this.inventarioGeneral = new Inventario();
         initComponents();
         configurarMenuListeners();
     }
