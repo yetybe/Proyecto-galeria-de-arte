@@ -370,19 +370,19 @@ public class VentanaEditarObra extends javax.swing.JFrame {
             obraAEditar.setPrecio(Float.parseFloat(txtPrecio.getText().trim()));
             
             // Actualizar datos específicos según el tipo
-            if ("Pintura".equals(obraAEditar.getTipo()))
+            if (obraAEditar instanceof Pintura)
             {
                 Pintura pintura = (Pintura) obraAEditar;
                 pintura.setEstilo(txtEstilo.getText().trim());
                 pintura.setSoporte(txtSoporte.getText().trim());
-                pintura.setDimensiones2D(txtDimensiones3D.getText().trim());
+                pintura.setDimensiones2D(txtDimensiones2D.getText().trim());
             }
-            else if ("Escultura".equals(obraAEditar.getTipo()))
+            else if (obraAEditar instanceof Escultura)
             {
                 Escultura escultura = (Escultura) obraAEditar;
                 escultura.setMaterial(txtMaterial.getText().trim());
                 escultura.setPeso(txtPeso.getText().trim());
-                escultura.setDimensiones3D(txtDimensiones2D.getText().trim());
+                escultura.setDimensiones3D(txtDimensiones3D.getText().trim());
             }
             
             JOptionPane.showMessageDialog(this, "Obra actualizada exitosamente");
