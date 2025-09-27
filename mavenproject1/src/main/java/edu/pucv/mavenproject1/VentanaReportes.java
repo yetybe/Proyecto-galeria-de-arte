@@ -15,15 +15,16 @@ import java.util.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.PrintWriter;
 import java.io.IOException;
+import entidades.Inventario;
 
 public class VentanaReportes extends javax.swing.JFrame {
     private ArrayList<Artista> listaArtistas;
-    private ArrayList<ObraArte> listaObras;
+    private Inventario inventarioGeneral;
     private Map<Integer, Exposicion> exposiciones;
 
-    public VentanaReportes(ArrayList<Artista> listaArtistas, ArrayList<ObraArte> listaObras, Map<Integer, Exposicion> exposiciones) {
+    public VentanaReportes(ArrayList<Artista> listaArtistas, Inventario i, Map<Integer, Exposicion> exposiciones) {
         this.listaArtistas = listaArtistas;
-        this.listaObras = listaObras;
+        inventarioGeneral = i;
         this.exposiciones = exposiciones;
 
         initComponents();
