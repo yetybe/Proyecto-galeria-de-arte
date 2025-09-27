@@ -305,7 +305,7 @@ public class VentanaMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Primero cargue datos CSV");
             return;
         }
-        VentanaEliminar ventanaEliminar = new VentanaEliminar(listaArtistas, inventarioGeneral.getObrasComoLista());
+        VentanaEliminar ventanaEliminar = new VentanaEliminar(inventarioGeneral);
         ventanaEliminar.setVisible(true);
     }
     
