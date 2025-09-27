@@ -5,12 +5,13 @@
 package entidades;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 /**
  *
  * @author dmena
@@ -23,7 +24,7 @@ public class LectorCVS
         ArrayList<ObraArte> obras = new ArrayList<>();
         Map<Integer, Artista> mapaArtistas = new HashMap<>();
         
-        BufferedReader br = new BufferedReader(new FileReader("datosGaleria.csv"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("datosGaleria.csv"), StandardCharsets.UTF_8));
         String linea;
         boolean primeraLinea = true;
             
