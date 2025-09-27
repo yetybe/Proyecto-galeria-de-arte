@@ -97,7 +97,12 @@ public class VentanaAgregar extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "ID debe ser entero.");
                 return;
             }
-
+            
+            if (inventarioGeneral != null && inventarioGeneral.existeId(id)) {
+                JOptionPane.showMessageDialog(this, "Ya existe una obra con ese ID. Elija otro ID.");
+                return;
+            }
+            
             int anio;
             try {
                 anio = Integer.parseInt(txtAnio.getText().trim());
@@ -131,13 +136,32 @@ public class VentanaAgregar extends javax.swing.JFrame {
                 String estilo = txtEstilo.getText().trim();
                 String soporte = txtSoporte.getText().trim();
                 String dimensiones2D = txtDimensiones2D.getText().trim();
-
+                
+                //  Validar estilo y soporte 
+                if (!estilo.matches("[\\p{L} ]+")) {
+                    JOptionPane.showMessageDialog(this, "El estilo debe contener solo letras");
+                    return;
+                }
+                if (!soporte.matches("[\\p{L} ]+")) {
+                    JOptionPane.showMessageDialog(this, "El soporte debe contener solo letras");
+                    return;
+                }
                 nuevaObra = new Pintura(id, titulo, nombreArtista, anio, precio, estilo, soporte, dimensiones2D);
 
             } else { // Escultura
                 String material = txtMaterial.getText().trim();
-                String peso = txtPeso.getText().trim();
+                int pesoInt;
                 String dimensiones3D = txtDimensiones3D.getText().trim();
+                
+                
+                try {
+                    pesoInt = Integer.parseInt(txtPeso.getText().trim());
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "El peso debe ser un número entero.");
+                    return;
+                }
+                
+                String peso = String.valueOf(pesoInt);
 
                 nuevaObra = new Escultura(id, titulo, nombreArtista, anio, precio, material, peso, dimensiones3D);
             }
