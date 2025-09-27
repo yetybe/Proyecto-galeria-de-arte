@@ -296,7 +296,7 @@ public class VentanaMain extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(VentanaMain.this, "Primero cargue datos CSV");
                     return;
                 }
-                VentanaReportes ventanaReportes = new VentanaReportes(listaArtistas, inventarioGeneral.getObrasComoLista(), exposiciones);
+                VentanaReportes ventanaReportes = new VentanaReportes(inventarioGeneral, exposiciones , sistemaVentas);
                 ventanaReportes.setVisible(true);
     }
     private void abrirVentanaEliminar()
