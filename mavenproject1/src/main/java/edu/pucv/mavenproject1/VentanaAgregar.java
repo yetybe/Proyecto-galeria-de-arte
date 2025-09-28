@@ -242,7 +242,7 @@ public class VentanaAgregar extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         txtMaterial = new javax.swing.JTextField();
         txtPeso = new javax.swing.JTextField();
-        txtDimensiones3D = new javax.swing.JTextField();
+        txtDimensiones3D = new javax.swing.JFormattedTextField();
         comboArtista = new javax.swing.JComboBox<>();
         panelPintura = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -250,7 +250,7 @@ public class VentanaAgregar extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         txtEstilo = new javax.swing.JTextField();
         txtSoporte = new javax.swing.JTextField();
-        txtDimensiones2D = new javax.swing.JTextField();
+        txtDimensiones2D = new javax.swing.JFormattedTextField();
         btnAgregarArtista = new javax.swing.JButton();
         btnRecargar = new javax.swing.JButton();
 
@@ -291,13 +291,20 @@ public class VentanaAgregar extends javax.swing.JFrame {
 
         jLabel16.setText("Dimensiones 3D:");
 
+        try {
+            txtDimensiones3D.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###x###x###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout panelEsculturaLayout = new javax.swing.GroupLayout(panelEscultura);
         panelEscultura.setLayout(panelEsculturaLayout);
         panelEsculturaLayout.setHorizontalGroup(
             panelEsculturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEsculturaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelEsculturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelEsculturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDimensiones3D, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
                     .addGroup(panelEsculturaLayout.createSequentialGroup()
                         .addGroup(panelEsculturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,8 +313,7 @@ public class VentanaAgregar extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(panelEsculturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                            .addComponent(txtPeso)))
-                    .addComponent(txtDimensiones3D))
+                            .addComponent(txtPeso))))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
         panelEsculturaLayout.setVerticalGroup(
@@ -324,7 +330,7 @@ public class VentanaAgregar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDimensiones3D, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDimensiones3D, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -336,6 +342,17 @@ public class VentanaAgregar extends javax.swing.JFrame {
 
         jLabel13.setText("Dimensiones 2D:");
 
+        try {
+            txtDimensiones2D.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###x###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtDimensiones2D.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDimensiones2DActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelPinturaLayout = new javax.swing.GroupLayout(panelPintura);
         panelPintura.setLayout(panelPinturaLayout);
         panelPinturaLayout.setHorizontalGroup(
@@ -343,9 +360,6 @@ public class VentanaAgregar extends javax.swing.JFrame {
             .addGroup(panelPinturaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelPinturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelPinturaLayout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPinturaLayout.createSequentialGroup()
                         .addGroup(panelPinturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
@@ -353,9 +367,13 @@ public class VentanaAgregar extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panelPinturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtSoporte, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                            .addComponent(txtEstilo))))
+                            .addComponent(txtEstilo)))
+                    .addGroup(panelPinturaLayout.createSequentialGroup()
+                        .addGroup(panelPinturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(txtDimensiones2D, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addComponent(txtDimensiones2D)
         );
         panelPinturaLayout.setVerticalGroup(
             panelPinturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -371,8 +389,8 @@ public class VentanaAgregar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDimensiones2D, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(txtDimensiones2D, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
         );
 
         btnAgregarArtista.setText("Agregar Artista");
@@ -470,6 +488,10 @@ public class VentanaAgregar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtDimensiones2DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDimensiones2DActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDimensiones2DActionPerformed
     
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {                                      
     // Puedes dejar esto vacío o agregar lógica si necesitas
@@ -537,8 +559,8 @@ public class VentanaAgregar extends javax.swing.JFrame {
     private javax.swing.JPanel panelEscultura;
     private javax.swing.JPanel panelPintura;
     private javax.swing.JTextField txtAnio;
-    private javax.swing.JTextField txtDimensiones2D;
-    private javax.swing.JTextField txtDimensiones3D;
+    private javax.swing.JFormattedTextField txtDimensiones2D;
+    private javax.swing.JFormattedTextField txtDimensiones3D;
     private javax.swing.JTextField txtEstilo;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtMaterial;
