@@ -61,9 +61,9 @@ public class VentanaMain extends javax.swing.JFrame {
         menuAgregarObra = new javax.swing.JMenu();
         menuCrearExposicion = new javax.swing.JMenu();
         menuEditar = new javax.swing.JMenu();
+        menuEliminar = new javax.swing.JMenu();
         menuReportes = new javax.swing.JMenu();
         menuVentas = new javax.swing.JMenu();
-        menuEliminar = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
@@ -96,8 +96,11 @@ public class VentanaMain extends javax.swing.JFrame {
         menuCrearExposicion.setText("Crear Exposicion");
         jMenuBar1.add(menuCrearExposicion);
 
-        menuEditar.setText("Editar ");
+        menuEditar.setText("Editar Obras Exposicion");
         jMenuBar1.add(menuEditar);
+
+        menuEliminar.setText("Eliminar Obras Exposicion");
+        jMenuBar1.add(menuEliminar);
 
         menuReportes.setText("Reportes");
         jMenuBar1.add(menuReportes);
@@ -109,9 +112,6 @@ public class VentanaMain extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(menuVentas);
-
-        menuEliminar.setText("Eliminar ");
-        jMenuBar1.add(menuEliminar);
 
         menuSalir.setText("Salir");
         jMenuBar1.add(menuSalir);

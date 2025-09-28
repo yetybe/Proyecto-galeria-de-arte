@@ -63,7 +63,12 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuEditar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Editar "/>
+            <Property name="text" type="java.lang.String" value="Editar Obras Exposicion"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuEliminar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Eliminar Obras Exposicion"/>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuReportes">
@@ -78,11 +83,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuVentasActionPerformed"/>
           </Events>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="menuEliminar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Eliminar "/>
-          </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuSalir">
           <Properties>
