@@ -89,6 +89,22 @@
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="menuEditarExpo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Editar Expo"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuEditarExpoActionPerformed"/>
+          </Events>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuEliminarExpo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Eliminar Expo"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuEliminarExpoActionPerformed"/>
+          </Events>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu4">
         </Menu>
       </SubComponents>
@@ -120,7 +136,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="327" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="204" max="-2" attributes="0"/>
-              <EmptySpace pref="336" max="32767" attributes="0"/>
+              <EmptySpace pref="351" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

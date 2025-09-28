@@ -65,6 +65,8 @@ public class VentanaMain extends javax.swing.JFrame {
         menuReportes = new javax.swing.JMenu();
         menuVentas = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenu();
+        menuEditarExpo = new javax.swing.JMenu();
+        menuEliminarExpo = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
         jScrollPane2.setViewportView(jTextPane1);
@@ -115,6 +117,22 @@ public class VentanaMain extends javax.swing.JFrame {
 
         menuSalir.setText("Salir");
         jMenuBar1.add(menuSalir);
+
+        menuEditarExpo.setText("Editar Expo");
+        menuEditarExpo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEditarExpoActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(menuEditarExpo);
+
+        menuEliminarExpo.setText("Eliminar Expo");
+        menuEliminarExpo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEliminarExpoActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(menuEliminarExpo);
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -126,7 +144,7 @@ public class VentanaMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(327, 327, 327)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(336, Short.MAX_VALUE))
+                .addContainerGap(351, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,8 +165,16 @@ public class VentanaMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_menuVentasActionPerformed
-                                         
 
+    private void menuEditarExpoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarExpoActionPerformed
+        abrirVentanaEditExpo();
+    }//GEN-LAST:event_menuEditarExpoActionPerformed
+
+    private void menuEliminarExpoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEliminarExpoActionPerformed
+        abrirVentanaEliminarExpo();
+    }//GEN-LAST:event_menuEliminarExpoActionPerformed
+                                         
+    
     private void configurarMenuListeners()
     {
         // Configurar menú "Cargar Datos"
@@ -229,6 +255,43 @@ public class VentanaMain extends javax.swing.JFrame {
                 confirmarSalida();
             }
         });
+    }
+    
+    private void abrirVentanaEditExpo()
+    {
+        if (inventarioGeneral.estaVacio()) { 
+        JOptionPane.showMessageDialog(this, "Primero debe cargar datos desde el CSV.", "Inventario Vacío", JOptionPane.WARNING_MESSAGE);
+        return;
+        }
+
+        String idStr = JOptionPane.showInputDialog(this, "Ingrese el ID de la Expocicion que desea editar:", "Editar Expo", JOptionPane.QUESTION_MESSAGE);
+
+    // Si el usuario presiona "Cancelar" o no escribe nada, salimos del método.
+        if (idStr == null || idStr.trim().isEmpty()) {
+            return;
+        }
+
+        try {
+        
+            int idExpo = Integer.parseInt(idStr);
+        
+        
+            Exposicion ExpoParaEditar = exposiciones.get(idExpo);
+
+            if (ExpoParaEditar != null) 
+            {
+                VentanaEditExpo ventanaEditar = new VentanaEditExpo(ExpoParaEditar);
+                ventanaEditar.setVisible(true);
+            } 
+            else {
+
+            JOptionPane.showMessageDialog(this, "No se encontró ninguna Expo con el ID: " + idExpo, "Error de Búsqueda", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID numérico válido.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private void abrirVentanaAgregar()
@@ -399,7 +462,9 @@ public class VentanaMain extends javax.swing.JFrame {
     private javax.swing.JMenu menuCargarDatos;
     private javax.swing.JMenu menuCrearExposicion;
     private javax.swing.JMenu menuEditar;
+    private javax.swing.JMenu menuEditarExpo;
     private javax.swing.JMenu menuEliminar;
+    private javax.swing.JMenu menuEliminarExpo;
     private javax.swing.JMenu menuReportes;
     private javax.swing.JMenu menuSalir;
     private javax.swing.JMenu menuVentas;
