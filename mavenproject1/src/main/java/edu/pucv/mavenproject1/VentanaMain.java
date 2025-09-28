@@ -15,6 +15,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import entidades.Ventas;
 import entidades.Inventario;
+import java.util.List;
 
 /**
  *
@@ -167,11 +168,12 @@ public class VentanaMain extends javax.swing.JFrame {
     }//GEN-LAST:event_menuVentasActionPerformed
 
     private void menuEditarExpoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarExpoActionPerformed
-        abrirVentanaEditExpo();
+        
     }//GEN-LAST:event_menuEditarExpoActionPerformed
 
     private void menuEliminarExpoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEliminarExpoActionPerformed
         abrirVentanaEliminarExpo();
+        
     }//GEN-LAST:event_menuEliminarExpoActionPerformed
                                          
     
@@ -187,6 +189,23 @@ public class VentanaMain extends javax.swing.JFrame {
             }
         });
         
+        menuEliminarExpo.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                abrirVentanaEliminarExpo();
+            }
+        });
+        
+        menuEditarExpo.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                abrirVentanaEditExpo();
+            }
+        });
         // Configurar menú "Agregar Obra" 
         menuAgregarObra.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
@@ -271,6 +290,12 @@ public class VentanaMain extends javax.swing.JFrame {
         exposiciones.remove(Integer.parseInt(idStr));
         JOptionPane.showMessageDialog(this, "Exposición Eliminada correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
+
+
+    
+
+    
+ 
     
     private void abrirVentanaEditExpo()
     {
@@ -308,6 +333,78 @@ public class VentanaMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID numérico válido.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    private void abrirVentanaEditar() {
+    if (inventarioGeneral.estaVacio()) { 
+        JOptionPane.showMessageDialog(this, "Primero debe cargar datos desde el CSV.", "Inventario Vacío", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // Preguntar ID de exposición
+    String idExposicionStr = JOptionPane.showInputDialog(this, 
+        "Ingrese el ID de la exposición:", 
+        "Seleccionar Exposición", 
+        JOptionPane.QUESTION_MESSAGE);
+
+    if (idExposicionStr == null || idExposicionStr.trim().isEmpty()) {
+        return;
+    }
+
+    try {
+        int idExposicion = Integer.parseInt(idExposicionStr);
+        Exposicion exposicionSeleccionada = exposiciones.get(idExposicion);
+        
+        if (exposicionSeleccionada != null) {
+            // Mostrar diálogo para seleccionar obra
+            seleccionarObraDialog(exposicionSeleccionada);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró exposición con ID: " + idExposicion);
+        }
+        
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Ingrese un ID numérico válido");
+    }
+}
+
+    private void seleccionarObraDialog(Exposicion exposicion) {
+    List<ObraArte> obras = exposicion.getObras();
+    
+    if (obras.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "La exposición no tiene obras");
+        return;
+    }
+    
+    // Crear array de opciones
+    String[] opcionesObras = new String[obras.size()];
+    for (int i = 0; i < obras.size(); i++) {
+        ObraArte obra = obras.get(i);
+        opcionesObras[i] = "ID: " + obra.getId() + " - " + obra.getTitulo();
+    }
+    
+    // Mostrar diálogo de selección
+    String obraSeleccionada = (String) JOptionPane.showInputDialog(
+        this,
+        "Seleccione la obra a editar:",
+        "Seleccionar Obra",
+        JOptionPane.QUESTION_MESSAGE,
+        null,
+        opcionesObras,
+        opcionesObras[0]
+    );
+    
+    if (obraSeleccionada != null) {
+        // Encontrar la obra seleccionada
+        for (int i = 0; i < opcionesObras.length; i++) {
+            if (opcionesObras[i].equals(obraSeleccionada)) {
+                ObraArte obra = obras.get(i);
+                // Abrir tu ventana de edición actual
+                VentanaEditarObra ventanaEditar = new VentanaEditarObra(obra , inventarioGeneral.getObrasComoLista());
+                ventanaEditar.setVisible(true);
+                break;
+            }
+        }
+    }
+}
     
     private void abrirVentanaAgregar()
     {
@@ -321,42 +418,6 @@ public class VentanaMain extends javax.swing.JFrame {
     
 // Dentro de tu clase VentanaMain.java
 
-    private void abrirVentanaEditar() {
-        if (inventarioGeneral.estaVacio()) { 
-        JOptionPane.showMessageDialog(this, "Primero debe cargar datos desde el CSV.", "Inventario Vacío", JOptionPane.WARNING_MESSAGE);
-        return;
-        }
-
-        String idStr = JOptionPane.showInputDialog(this, "Ingrese el ID de la obra que desea editar:", "Editar Obra", JOptionPane.QUESTION_MESSAGE);
-
-    // Si el usuario presiona "Cancelar" o no escribe nada, salimos del método.
-        if (idStr == null || idStr.trim().isEmpty()) {
-            return;
-        }
-
-        try {
-        
-            int idObra = Integer.parseInt(idStr);
-        
-        
-            ObraArte obraParaEditar = inventarioGeneral.buscarObra(idObra);
-
-        
-            if (obraParaEditar != null) 
-            {
-                VentanaEditarObra ventanaEditar = new VentanaEditarObra(obraParaEditar, inventarioGeneral.getObrasComoLista());
-                ventanaEditar.setVisible(true);
-            } 
-            else {
-
-            JOptionPane.showMessageDialog(this, "No se encontró ninguna obra con el ID: " + idObra, "Error de Búsqueda", JOptionPane.ERROR_MESSAGE);
-        }
-        
-    } catch (NumberFormatException e) {
-
-        JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID numérico válido.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
-    }
-    }
     
     private void abrirVentanaVentas()
     {
@@ -383,7 +444,7 @@ public class VentanaMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Primero cargue datos CSV");
             return;
         }
-        VentanaEliminar ventanaEliminar = new VentanaEliminar(inventarioGeneral);
+        VentanaEliminar ventanaEliminar = new VentanaEliminar(exposiciones , inventarioGeneral);
         ventanaEliminar.setVisible(true);
     }
     
