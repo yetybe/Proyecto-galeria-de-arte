@@ -257,10 +257,25 @@ public class VentanaMain extends javax.swing.JFrame {
         });
     }
     
+    private void abrirVentanaEliminarExpo()
+    {
+        if (exposiciones.isEmpty()) { 
+        JOptionPane.showMessageDialog(this, "Primero debe crear una Expo.", "Inventario Vacío", JOptionPane.WARNING_MESSAGE);
+        return;
+        }
+
+        String idStr = JOptionPane.showInputDialog(this, "Ingrese el ID de la Expocicion que desea editar:", "Editar Expo", JOptionPane.QUESTION_MESSAGE);
+        if (idStr == null || idStr.trim().isEmpty()) {
+            return;
+        }
+        exposiciones.remove(Integer.parseInt(idStr));
+        JOptionPane.showMessageDialog(this, "Exposición Eliminada correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
     private void abrirVentanaEditExpo()
     {
-        if (inventarioGeneral.estaVacio()) { 
-        JOptionPane.showMessageDialog(this, "Primero debe cargar datos desde el CSV.", "Inventario Vacío", JOptionPane.WARNING_MESSAGE);
+        if (exposiciones.isEmpty()) { 
+        JOptionPane.showMessageDialog(this, "Primero debe crear una Expo.", "Inventario Vacío", JOptionPane.WARNING_MESSAGE);
         return;
         }
 
