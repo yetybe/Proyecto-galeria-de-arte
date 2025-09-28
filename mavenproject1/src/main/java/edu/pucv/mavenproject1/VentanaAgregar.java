@@ -177,7 +177,10 @@ public class VentanaAgregar extends javax.swing.JFrame {
                 int pesoInt;
                 String dimensiones3D = txtDimensiones3D.getText().trim();
                 
-                
+                  if (material.matches("\\d+")) { 
+                    JOptionPane.showMessageDialog(this, "El material no puede ser un número.");
+                    return;
+                }
                 try {
                     pesoInt = Integer.parseInt(txtPeso.getText().trim());
                 } catch (NumberFormatException e) {
